@@ -6,6 +6,8 @@ var cookieParser = require('cookie-parser');
 
 var app = express();
 
+app.use(express.static(__dirname + '/public'));
+
 app.get('/', function(request, response) {
   response.render('index.ejs', {layout: false, 
     title: "test title"},
