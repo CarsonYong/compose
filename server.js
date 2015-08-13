@@ -7,7 +7,12 @@ var cookieParser = require('cookie-parser');
 var app = express();
 
 app.get('/', function(request, response) {
-  response.send("Hello World!")
+  response.render('index.ejs', {layout: false, 
+    title: "test title"},
+    function(err, html){
+      response.send(html);
+    });
+
 })
 
 

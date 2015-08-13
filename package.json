@@ -14,6 +14,7 @@
   "dependencies": {
     "express": "*",
     "querystring": "*",
-    "cookie-parser": "*"
+    "cookie-parser": "*",
+    "ejs": "*"
   }
 }
