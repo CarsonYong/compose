@@ -15,6 +15,7 @@
     "express": "*",
     "querystring": "*",
     "cookie-parser": "*",
-    "ejs": "*"
+    "ejs": "*",
+    "express-ejs-layouts": "*"
   }
 }
