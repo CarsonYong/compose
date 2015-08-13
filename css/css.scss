@@ -1,0 +1,36 @@
+* {
+  border: 1px solid red;
+}
+
+.container {
+  position: relative;
+}
+
+.navbar {
+  width: 100%;
+  position: absolute;
+  background: rgba(29,29,29,0.40);
+  filter: blur(10px);
+  z-index: 1;
+}
+
+.navbar ul {
+  height: 50px;
+  list-style: none;
+  text-align: right;
+  color: #ffffff;
+  font-family: 'Source Code Pro';
+  font-size: 1em;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar li {
+  display: inline;
+  text-decoration: none;
+  color; #ffffff
+}
+
+.floated_img {
+  float: left;
+}
