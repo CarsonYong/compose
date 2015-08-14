@@ -1,0 +1,119 @@
+@font-face {
+  font-family: 'NeutraThin';
+  src: url('/fonts/neutraDispThin.otf');
+}
+
+@font-face {
+  font-family: 'Neutra';
+  src: url('/fonts/NeutraTextBook.otf');
+}
+
+@font-face {
+  font-family: 'NeutraBold';
+  src: url('/fonts/NeutraTextBold.otf');
+}
+
+@font-face {
+    font-family: 'fabfeltscriptbold';
+    src: url('/fonts/fabfeltscript-bold.eot');
+    src: url('/fonts/fabfeltscript-bold.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/fabfeltscript-bold.woff2') format('woff2'),
+         url('/fonts/fabfeltscript-bold.woff') format('woff'),
+         url('/fonts/fabfeltscript-bold.ttf') format('truetype'),
+         url('/fonts/fabfeltscript-bold.svg#fabfeltscriptbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+  border: 1px solid red;
+}
+
+.container {
+  position: relative;
+}
+
+.background-wrapper {
+  width: 100%;
+  overflow: hidden;
+  filter: blur(10px);
+}
+
+.background {
+  width: 125%;
+}
+
+#navbar-brand {
+  margin-top: 1%;
+  margin-left: 5%;
+  font-family: fabfeltscriptbold;
+  font-size: 4em;
+  letter-spacing: 5px;
+  position: absolute;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.navbar {
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+}
+
+.navbar ul {
+  list-style: none;
+  text-align: right;
+  color: #ffffff;
+  font-family: NeutraThin;
+  font-size: 1.5em;
+  letter-spacing: 1px;
+  padding: 0;
+  margin-right: 5%;
+  margin-top: 2%;
+}
+
+.navbar ul ul {
+  display: none;
+}
+
+.navbar li {
+  display: inline-block;
+  text-decoration: none;
+  color; #ffffff;
+  border-radius: 10px;
+  padding-top: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-left: 1%;
+  margin-right: 1%;
+  line-height: 50px;
+}
+
+.navbar ul li:hover {
+  color: #ebb91c;
+}
+
+/*.navbar ul li ul.dropdown {
+  min-width: 100px;
+  background-color: inherit;
+  display: none;
+  position: absolute;
+}*/
+
+nav ul li:hover > ul {
+		display: block;
+	}
+
+.navbar ul li:hover ul.dropdown {
+  display: block;
+}
+
+.navbar ul li ul.dropdown li {
+  display: block;
+}
+
+
+.floated_img img {
+  margin: 0;
+  float: left;
+}

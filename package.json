@@ -16,6 +16,8 @@
     "querystring": "*",
     "cookie-parser": "*",
     "ejs": "*",
-    "express-ejs-layouts": "*"
+    "express-ejs-layouts": "*",
+    "node-sass": "*",
+    "supervisor": "*"
   }
 }
