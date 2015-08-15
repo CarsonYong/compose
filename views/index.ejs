@@ -2,23 +2,32 @@
 
   <h1>Visualise your favourite songs with Compose</h1>
 
-  <div>
-    <form id="search-form">
-    <input type="text" name="search" id="search-input" value="" placeholder="Enter an artist, song or album">
+  <div id="search-form">
+    <form>
+    <input type="text" name="search" id="search-input" value="" placeholder="Search Spotify for an artist, song or album">
     <br>
     <button>Search</button>
     </form>
   </div>
 
-  <div>
-    <h2>Search Results</h2>
-      <ul>
-        <li>Artist Name</li>
-          <ul>
-            <li>Track Title</li>
-            <li>Track Title</li>
-          </ul>
-      </ul>
+  <div id="search-results">
+    <p id="songs">SONGS</p>
+      <ul class="list"><a href="">
+        <img src="" alt="">
+        <li>title of song</li>
+        <li>artist name</li>
+      </ul></a>
+      <p id="artist">ARTIST</p>
+        <ul class="list"><a href="">
+          <img src="" alt="">
+          <li>artist name</li>
+        </ul></a>
+      <p id="album">ALBUM</p>
+        <ul class="list"><a href="">
+          <img src="" alt="">
+          <li>album name</li>
+          <li>artist name</li>
+        </ul></a>
   </div>
 
 </div>
