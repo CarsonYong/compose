@@ -12,10 +12,18 @@
     "url": ""
   },
   "dependencies": {
-    "express": "*",
-    "querystring": "*",
+    "body-parser": "^1.13.3",
     "cookie-parser": "*",
+    "echojs": "*",
     "ejs": "*",
-    "express-ejs-layouts": "*"
+    "express": "*",
+    "express-ejs-layouts": "*",
+    "jquery": "*",
+    "jsdom": "*",
+    "keyword-extractor": "0.0.12",
+    "najax": "*",
+    "node-sass": "*",
+    "querystring": "*",
+    "supervisor": "*"
   }
 }

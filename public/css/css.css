@@ -1,3 +1,238 @@
-body {
-  background-color: red;
+@font-face {
+  font-family: 'NeutraThin';
+  src: url('/fonts/NeutraDispThin.otf');
 }
+
+@font-face {
+  font-family: 'Neutra';
+  src: url('/fonts/NeutraTextBook.otf');
+}
+
+@font-face {
+  font-family: 'NeutraBold';
+  src: url('/fonts/NeutraTextBold.otf');
+}
+
+@font-face {
+    font-family: 'fabfeltscriptbold';
+    src: url('/fonts/fabfeltscript-bold.eot');
+    src: url('/fonts/fabfeltscript-bold.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/fabfeltscript-bold.woff2') format('woff2'),
+         url('/fonts/fabfeltscript-bold.woff') format('woff'),
+         url('/fonts/fabfeltscript-bold.ttf') format('truetype'),
+         url('/fonts/fabfeltscript-bold.svg#fabfeltscriptbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/** {
+  border: 1px solid red;
+}*/
+
+.container {
+  display: flex;
+  position: absolute;
+  top: 20%;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+/* Background */
+
+.background-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.background {
+  width: 125%;
+}
+
+.floated_img {
+  margin: 0;
+  float: left;
+  background-color: #1d1d1d;
+}
+
+.floated_img img {
+  opacity: 0.4;
+  -webkit-filter: blur(2px);
+  filter: blur(2px);
+}
+
+
+/* Navingation */
+
+#navbar-brand {
+  margin-top: 1%;
+  margin-left: 5%;
+  font-family: fabfeltscriptbold;
+  font-size: 4em;
+  letter-spacing: 5px;
+  position: absolute;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.navbar {
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  color: #ffffff;
+  list-style: none;
+}
+
+.navbar ul {
+  text-align: right;
+  font-family: NeutraThin;
+  font-size: 1.5em;
+  letter-spacing: 1px;
+  padding: 0;
+  margin-right: 5%;
+  margin-top: 2%;
+}
+
+.navbar li {
+  display: inline-block;
+  border-radius: 10px;
+  padding-top: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-left: 1%;
+  margin-right: 1%;
+  line-height: 50px;
+  cursor: pointer;
+}
+
+.navbar ul li:hover {
+  color: #ebb91c;
+}
+
+/* Landing Page */
+
+.landing-page {
+  padding: 2%;
+  border-radius: 10px;
+}
+
+.landing-page h1 {
+  font-family: NeutraThin;
+  font-size: 4em;
+  color: #ebb91c;
+}
+
+
+/* Search Form */
+
+#search-form {
+  text-align: center;
+}
+
+#search-form button {
+  margin: 4%;
+  border: none;
+  border-radius: 5px;
+  font-family: Neutra;
+  font-size: 1.5em;
+  color: #d9faff;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #32b1fc;
+}
+
+#search-input {
+  text-align: center;
+  font-family: Neutra;
+  font-size: 1.5em;
+  border: none;
+  border-radius: 15px;
+  width: 80%;
+  max-width: 500px;
+  height: 40px;
+  padding: 5px;
+}
+
+input:focus, textarea:focus {
+  box-shadow: 0 0 15px rgba(50, 177, 252, 1);
+  border: 1px solid rgb(50 177 252);
+  outline: 0; }
+
+
+/* Search Results */
+
+#search-results {
+  position: relative;
+  z-index: 1;
+  background-color: #1d1d1d;
+  display: none;
+  width: 80%;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -113px;
+  padding-top: 2%;
+  padding-bottom: 1%;
+  border-radius: 5px;
+  border-top: 1px solid #161515;
+  border-left: 1px solid #161515;
+  color: #fbfbfc;
+  box-shadow: 5px 5px 5px rgba(255,255,255,0.2);
+}
+
+/*#search-form:hover + #search-results {
+ display: block;
+}*/
+
+#search-results p {
+  font-family: NeutraBold;
+  letter-spacing: 3px;
+  margin: 0 auto;
+  max-width: inherit;
+  width: 80%;
+}
+
+#search-results ul {
+  border-radius: 5px;
+  margin-bottom: 4%;
+}
+
+#search-results ul a {
+  text-decoration: none;
+  display: block;
+  color: #fbfbfc;
+}
+
+.list {
+  background-color: #2e2f33;
+  font-family: NeutraThin;
+  font-size: 1.5em;
+  margin-left:auto;
+  margin-right: auto;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  max-width: inherit;
+  width: 80%;
+  list-style-type: none;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.list img {
+  border-radius: 50%;
+  background-color: #ebb91c;
+}
+
+.list li:first-of-type {
+  font-family: Neutra;
+  font-size: 0.8em;
+}
+
+/* on hover  */
+
+#search-results ul:hover {
+  background-color: #46484e;
+}
+
