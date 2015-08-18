@@ -21,6 +21,7 @@
     "jquery": "*",
     "jsdom": "*",
     "keyword-extractor": "0.0.12",
+    "lodash": "^3.10.1",
     "najax": "*",
     "node-sass": "*",
     "querystring": "*",

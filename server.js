@@ -6,6 +6,7 @@ var app = express();
 var expressLayouts = require('express-ejs-layouts')
 var bodyParser = require('body-parser');
 var keywordExtractor = require('keyword-extractor');
+var _ = require('lodash');
 
 
 app.set('view engine', 'ejs');
@@ -26,8 +27,17 @@ app.get('/', function(request, response) {
 });
 
 app.post('/stopwords', function(request, response) {
-  
-  response.json({lyrics: keywordExtractor.extract(request.body.lyrics)})
+  var counts = _.countBy(keywordExtractor.extract(request.body.lyrics),function(word) {
+    return word;
+  })
+  var sorted = _.sortBy(_.pairs(counts),function(w){
+    return w[1];
+  }).reverse()
+  var wordlist = _.map(sorted,function(pair){
+    return pair[0];
+  }).slice(0, 9)
+  console.log(wordlist);
+  response.json(wordlist)
 
 })
 

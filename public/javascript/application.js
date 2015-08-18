@@ -1,6 +1,5 @@
 $(document).ready(function() {
 //var stopwords = []
-
   $("#search-btn").click(function(e) {
     e.preventDefault()
     var searchQuery = $("#search-input").val();
@@ -8,7 +7,7 @@ $(document).ready(function() {
     //alert(searchQuery);
 
    $.ajax({
-    url: "https://api.spotify.com/v1/search?q="+searchQuery+"&type=artist,track,album&limit=3", 
+    url: "https://api.spotify.com/v1/search?q="+searchQuery+"&type=artist,track,album&limit=1", 
      method:'get',
      dataType: 'json',
      success: function(html){
@@ -65,12 +64,21 @@ $(document).ready(function() {
               data: {lyrics:lyrics}
             }).success(function(data){
               console.log(data)
-              var counts = data.lyrics.join(" ").replace(/[^\w\s]/g, "").split(/\s+/).reduce(function(map, word){
-              map[word] = (map[word]||0)+1;
-              return map;
-            }, Object.create(null))
-            console.log(counts)
-            debugger
+              for(var i = 0; i < data.length; i ++) {
+                var word = data[i];
+                $.ajax({
+                url: "https://api.instagram.com/v1/tags/"+data[i]+"/media/recent?client_id=",
+                method: "GET",
+                dataType: 'jsonp'
+              }).success(function(data){
+                arr = data.data;
+                var url = arr[0].images.low_resolution.url;
+                console.log(url)
+                $("<img src='"+url+"'></img>").appendTo(".floated_img");
+
+              })
+              }
+
           })
             })
             //lyrics = lyrics.replace(stopwords, "")
