@@ -29,7 +29,7 @@
   border: 1px solid red;
 }*/
 
-.container {
+.page-content {
   display: flex;
   position: absolute;
   top: 20%;
@@ -50,13 +50,13 @@
   width: 125%;
 }
 
-.floated_img {
-  margin: 0;
+.floated-img {
   float: left;
   background-color: #1d1d1d;
 }
 
-.floated_img img {
+.floated-img img {
+  display: block;
   opacity: 0.4;
   -webkit-filter: blur(2px);
   filter: blur(2px);
@@ -77,42 +77,72 @@
 }
 
 .navbar {
+  display: block;
+  align-items: baseline;
+  justify-content: space-between;
   width: 100%;
   position: absolute;
   z-index: 1;
   color: #ffffff;
-  list-style: none;
 }
 
 .navbar ul {
   text-align: right;
-  font-family: NeutraThin;
-  font-size: 1.5em;
-  letter-spacing: 1px;
   padding: 0;
   margin-right: 5%;
   margin-top: 2%;
+  list-style: none;
 }
 
 .navbar li {
+  font-family: NeutraThin;
+  font-size: 1.5em;
+  letter-spacing: 1px;
   display: inline-block;
   border-radius: 10px;
   padding-top: 3px;
   padding-left: 5px;
   padding-right: 5px;
-  margin-left: 1%;
   margin-right: 1%;
   line-height: 50px;
   cursor: pointer;
+  float: right;
 }
 
 .navbar ul li:hover {
   color: #ebb91c;
 }
 
+/* navbar for player to have Neurta text and color #1d1d1d */
+
+#search-icon {
+  width: 40px;
+  height: 40px;
+  float: left;
+  margin-top: 5px;
+}
+
+#search-input-player {
+  width: 0px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  text-align: center;
+  transition: width 0.5s;
+}
+
+#search-input-player:focus {
+  width: 200px;
+  border-radius: 15px;
+  outline: none;
+  color: #1d1d1d;
+}
+
 /* Landing Page */
 
 .landing-page {
+  margin: 4%;
   padding: 2%;
   border-radius: 10px;
 }
@@ -126,36 +156,37 @@
 
 /* Search Form */
 
-#search-form {
-  text-align: center;
-}
-
 #search-form button {
-  margin: 4%;
+  margin-left: 5%;
+  position: absolute;
+  margin-left: -5px;
+  height: 50px;
   border: none;
-  border-radius: 5px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
   font-family: Neutra;
   font-size: 1.5em;
   color: #d9faff;
   padding: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
+  width: 100px;
   background-color: #32b1fc;
 }
 
 #search-input {
+  margin-left: 15%;
   text-align: center;
-  font-family: Neutra;
-  font-size: 1.5em;
+  font-family: NeutraThin;
+  font-size: 2em;
   border: none;
-  border-radius: 15px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
   width: 80%;
   max-width: 500px;
   height: 40px;
   padding: 5px;
 }
 
-input:focus, textarea:focus {
+#search-form input:focus, textarea:focus {
   box-shadow: 0 0 15px rgba(50, 177, 252, 1);
   border: 1px solid rgb(50 177 252);
   outline: 0; }
@@ -164,15 +195,14 @@ input:focus, textarea:focus {
 /* Search Results */
 
 #search-results {
-  position: relative;
+  position: absolute;
   z-index: 1;
   background-color: #1d1d1d;
   display: none;
   width: 80%;
   max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: -113px;
+  margin-left: 16%;
+  margin-top: 0px;
   padding-top: 2%;
   padding-bottom: 1%;
   border-radius: 5px;
@@ -230,9 +260,57 @@ input:focus, textarea:focus {
   font-size: 0.8em;
 }
 
-/* on hover  */
-
 #search-results ul:hover {
   background-color: #46484e;
+}
+
+
+/* player */
+
+.player-wrapper {
+  width: 100%;
+  overflow: hidden;
+  -webkit-animation: moveLeft 50s infinite alternate;
+  animation: moveLeft 50s infinite alternate;
+}
+
+.player {
+  width: 125%;
+}
+
+.player-floated-img {
+  float: left;
+  height: 320px;
+  width: calc(100% + 320px);
+  overflow: hidden;
+}
+
+.player-floated-img img {
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  margin-left: -5px;
+}
+
+.player-floated-img img:hover {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    cursor: pointer;
+
+    -webkit-box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
+    box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
+}
+
+.first {
+  -webkit-animation: bannermove 30s linear infinite;
+          animation: bannermove 30s linear infinite;
+}
+
+@-webkit-keyframes "bannermove" {
+ 0% {
+   margin-left: 0px;
+ }
+ 100% {
+   margin-left: -2125px;
+ }
 }
 
