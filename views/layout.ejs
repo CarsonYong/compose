@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+   <script src="https://fb.me/react-with-addons-0.13.3.js"></script>
+  <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+  <script src="javascript/templates.jsx" type="text/jsx"></script>
+
   <link rel="stylesheet" type="text/css" href="css/normalize.css">
   <!-- <link rel="stylesheet" type="text/css" href="css/skeleton.css"> -->
   <link rel="stylesheet" type="text/css" href="css/css.css">
@@ -8,31 +12,9 @@
   <title>Compose</title>
 </head>
 <body>
-
-  <header>
-    <nav id="navbar-player" class="navbar">
-    <a id="navbar-brand" href="/">Compose</a>
-     <ul>
-       <li><form id="search-player">
-         <label for="search-input-player" id="search-input-player-label"><img id="search-icon" src="/images/ic_search_white_48dp.png" alt="search image"></label>
-         <input type="text" name="search-input-player" class="arrow_box" id="search-input-player" placeholder="Search for more music">
-       </form></li>
-         </ul>
-        <li>SIGN UP</li>
-       <li>LOGIN</li>
-       <li>LOGOUT</li>
-     </ul>
-    </nav>
-  </header>
-
-  <div class="container">
-
-    <%- body %>
-
-  </div>
+  <div id="app"></div>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="/javascript/application.js"></script>
-
+  <script src="/javascript/app.jsx" type="text/jsx">></script>
 </body>
 </html>

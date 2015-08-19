@@ -7,6 +7,11 @@ var expressLayouts = require('express-ejs-layouts')
 var bodyParser = require('body-parser');
 var keywordExtractor = require('keyword-extractor');
 var _ = require('lodash');
+var React = require('react');
+// ReactApp = React.createFactory(require('../components/ReactApp'));
+
+//var reactHtml = React.renderToString(App({})); // make html to send to client
+// res.render('index.ejs', {reactOutput: reactHtml}); // give template html
 
 
 app.set('view engine', 'ejs');
@@ -33,6 +38,12 @@ app.post('/stopwords', function(request, response) {
   var sorted = _.sortBy(_.pairs(counts),function(w){
     return w[1];
   }).reverse()
+
+
+
+  //F
+
+
   //console.log(sorted.length)
   // var ignore = sorted.indexOf("*******");
   // var ignore1 = sorted.indexOf("commercial");
@@ -42,13 +53,13 @@ app.post('/stopwords', function(request, response) {
   // }
   // console.log(sorted)
 
-  for(var i = 0; i < sorted.length; i++) {
-    var sort = sorted[i];
-    console.log(sort)
+  // for(var i = 0; i < sorted.length; i++) {
+  //   var sort = sorted[i];
+  //   console.log(sort)
   
-    if(sort == "*******" || sort == "commercial" || sort == "lyrics")
-      console.log("test")
-  }
+  //   if(sort == "*******" || sort == "commercial" || sort == "lyrics")
+  //     console.log("test")
+  // }
 
   var wordlist = _.map(sorted,function(pair){
     return pair[0];
@@ -57,6 +68,12 @@ app.post('/stopwords', function(request, response) {
   response.json(wordlist)
 
 })
+
+// app.get('/react', function(request, response) {
+//   React.render (
+//     <h1>Hello World!</h1>
+//     )
+// })
 
 app.get('/signup', function(request, response) {
   response.render('signup.ejs', {layout: 'layout'},

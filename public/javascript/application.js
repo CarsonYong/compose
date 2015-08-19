@@ -39,7 +39,7 @@ $(document).ready(function() {
       $('<iframe src="https://embed.spotify.com/?uri=spotify:track:'+songId+'" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>').appendTo(".navbar");
       //Make ajax call for musixmatch song id number
       $.ajax({
-        url:"http://developer.echonest.com/api/v4/song/search?api_key=FZBHWASTWJKMBT0CU&artist="+songArtist+"&title="+songName+"&results=11&bucket=tracks&bucket=id:musixmatch-WW",
+        url:"http://developer.echonest.com/api/v4/song/search?api_key=&artist="+songArtist+"&title="+songName+"&results=11&bucket=tracks&bucket=id:musixmatch-WW",
         method: 'get',
         dataType: 'json'
         }).success(function(html){
@@ -51,7 +51,7 @@ $(document).ready(function() {
           id = parseInt(id[1])
           console.log(id)
           $.ajax({
-            url: "http://api.musixmatch.com/ws/1.1/track.lyrics.get?apikey=c1652e120f3e1c24a918c09c65b219a9&track_id="+id+"&format=jsonp",
+            url: "http://api.musixmatch.com/ws/1.1/track.lyrics.get?apikey=&track_id="+id+"&format=jsonp",
             method: 'get',
             dataType: 'jsonp'
           }).success(function(html){
@@ -70,7 +70,7 @@ $(document).ready(function() {
                 var word = data[i];
                 console.log('1',data[i])
                 $.ajax({
-                url: "https://api.instagram.com/v1/tags/"+data[i]+"/media/recent?client_id=6b57da6cc49c4e2ca5af262214decb93",
+                url: "https://api.instagram.com/v1/tags/"+data[i]+"/media/recent?client_id=",
                 method: "GET",
                 dataType: 'jsonp'
               }).success(function(data){
