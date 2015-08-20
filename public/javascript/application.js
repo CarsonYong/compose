@@ -63,7 +63,7 @@ $(document).ready(function() {
               method: 'post',
               dataType: 'json',
               data: {lyrics:lyrics}
-            }).success(function(data){
+            }).done(function(data){
               console.log(data)
               $(".floated-img").empty();
               for(var i = 0; i < data.length; i ++) {
@@ -73,7 +73,7 @@ $(document).ready(function() {
                 url: "https://api.instagram.com/v1/tags/"+data[i]+"/media/recent?client_id=",
                 method: "GET",
                 dataType: 'jsonp'
-              }).success(function(data){
+              }).dome(function(data){
                 arr = data.data;
                 console.log(JSON.stringify(arr[0].tags))
                 for(var i = 0; i< arr.length; i ++) {

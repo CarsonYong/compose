@@ -5,6 +5,8 @@ var render = function() {
   )
 }
 
+var array = [];
+
 var state = {
   songId: null,
   songName: null,
@@ -29,14 +31,10 @@ var state = {
     state.songArtist = result.artists[0].name;
     state.songName = result.name;
     state.getLyrics();
-    //state.topLyrics();
     render()
   },
 
   updateImgURL: function(url){
-    //console.log(url)
-    state.songImages = url
-    //console.log(state.songImages)
     render()
   },
 
@@ -52,6 +50,29 @@ var state = {
 
   getLyrics: function() {
 
+    var callbck = function(data){
+      if(i < data.length){
+        i++
+      var word = data[i];
+      $.ajax({
+        url: "https://api.instagram.com/v1/tags/"+word+"/media/recent?client_id=",
+        method: "GET",
+        dataType: 'jsonp'
+      }).success(callbck)
+    } else {
+      arr = data.data;
+      for(var i = 0; i< arr.length; i ++) {
+        var img = arr[i];
+        var url = img.images.low_resolution.url;
+        state.instaArr.push(url)
+        
+      }
+      console.log(state.instaArr.length)
+      state.updateImgURL(state.instaArr)
+    }
+      
+    }
+
     $.ajax({
         url:"http://developer.echonest.com/api/v4/song/search?api_key=&artist="+state.songArtist+"&title="+state.songName+"&results=11&bucket=tracks&bucket=id:musixmatch-WW",
         method: 'get',
@@ -62,46 +83,42 @@ var state = {
           console.log(musixmatchId)
           id = musixmatchId.split("song:")
           id = parseInt(id[1])
-          console.log(id)
           $.ajax({
             url: "http://api.musixmatch.com/ws/1.1/track.lyrics.get?apikey=&track_id="+id+"&format=jsonp",
             method: 'get',
             dataType: 'jsonp'
           }).success(function(data){
             var lyrics = data.message.body.lyrics.lyrics_body;
-            console.log(lyrics)
                       $.ajax({
               url: "/stopwords",
               method: 'post',
               dataType: 'json',
               data: {lyrics:lyrics}
             }).success(function(data){
-              console.log(data)
               $(".floated-img").empty();
-              for(var i = 0; i < data.length; i ++) {
-                var word = data[i];
-                console.log('1',data[i])
+                var word = data[0];
                 $.ajax({
-                url: "https://api.instagram.com/v1/tags/"+data[i]+"/media/recent?client_id=",
+                url: "https://api.instagram.com/v1/tags/"+word+"/media/recent?client_id=",
                 method: "GET",
                 dataType: 'jsonp'
-              }).success(function(data){
-                arr = data.data;
-                console.log(JSON.stringify(arr[0].tags))
-                for(var i = 0; i< arr.length; i ++) {
-                  var img = arr[i];
-                  var url = img.images.low_resolution.url;
-                  console.log(url)
-                  $("<div class='floated-img'><img src='"+url+"'></img></div>").appendTo(".background");
-                }
-              })
-              }
-              console.log('2')
-          })
-            })
+              }).success(callbck)
+              
+              
 
-        })// ends first success
+
+              
+          console.log("finish")
+       
+              //state.updateImgURL(array)
+              // state.updateImgURL(state.instaArr)
+              // console.log(state.updateImgURL)
+          })
+        })
+
+      })// ends first success
+
 } // Ends getLyrics
+
 } // Ends variable state
 
 
