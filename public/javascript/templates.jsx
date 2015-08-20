@@ -43,13 +43,21 @@ var SearchView = React.createClass({
 
 })
 
+
 var PlayerView = React.createClass({
-  render: function () {
-      return ( 
+  render: function() {
+
+      return  (
+      <div>
         <div>
-        <iframe src={"https://embed.spotify.com/?uri=spotify:track:"+state.songId} width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
-        </div> 
+          <iframe src={"https://embed.spotify.com/?uri=spotify:track:"+state.songId} width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+        </div>
+
+        <div>
+        </div>
+      </div>
       )
+
   }
 });
 

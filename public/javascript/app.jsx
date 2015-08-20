@@ -13,6 +13,7 @@ var state = {
   searchQuery: null,
   searchResults: null,
   songImages: null,
+  instaArr: [],
 
   updateQuery: function(text) {
     state.searchQuery = text
@@ -24,15 +25,19 @@ var state = {
   },
 
   updateSong: function(result) {
-    console.log(result)
     state.songId = result.id;
     state.songArtist = result.artists[0].name;
     state.songName = result.name;
-    console.log("id", state.songId)
-
-    state.getLyrics()
+    state.getLyrics();
+    //state.topLyrics();
     render()
+  },
 
+  updateImgURL: function(url){
+    //console.log(url)
+    state.songImages = url
+    //console.log(state.songImages)
+    render()
   },
 
   getSearchResults: function() {
@@ -40,8 +45,7 @@ var state = {
       url: "https://api.spotify.com/v1/search?q="+state.searchQuery+"&type=artist,track,album&limit=3", 
       method:'get',
       dataType: 'json',
-    }).success(function(data){
-      console.log(data)     
+    }).success(function(data){    
       state.updateSearchResults({albums: data.albums.items, artists: data.artists.items, tracks:data.tracks.items });
     })
   },
