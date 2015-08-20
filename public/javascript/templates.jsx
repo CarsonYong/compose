@@ -46,7 +46,15 @@ var SearchView = React.createClass({
 
 var PlayerView = React.createClass({
   render: function() {
-    console.log(state.instaArr.length)
+    
+      
+    var arr = []
+    var imageArray = state.instaArr
+
+    for(i =0; i < imageArray.length; i++){
+      arr.push(<img src={imageArray[i]}/>)
+    }
+
       return  (
 
       <div>
@@ -54,14 +62,12 @@ var PlayerView = React.createClass({
           <iframe src={"https://embed.spotify.com/?uri=spotify:track:"+state.songId} width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
         </div>
 
-
-        <div>
-
-          <img src={state.instaArr}/>
-
-
+     
+          <div>
+            {arr}
+           </div> 
+        
           
-        </div>
       </div>
       )
 
