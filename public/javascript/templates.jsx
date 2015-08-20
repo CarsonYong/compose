@@ -9,6 +9,8 @@ var SearchResultView = React.createClass({
   }
 })
 
+var array = []
+
 var SearchView = React.createClass({
   updateQuery: function(event) {
     state.updateQuery(event.target.value);
@@ -76,7 +78,29 @@ var PlayerView = React.createClass({
 
 var HomeView = React.createClass({
   render: function () {
-    var greeting = ""
+    
+  $.ajax({
+    url: "https://api.instagram.com/v1/tags/music/media/recent?client_id=6b57da6cc49c4e2ca5af262214decb93",
+    method: "GET",
+    dataType: 'jsonp'
+  }).success(function(data){
+    arr = data.data;
+    for(var i = 0; i< arr.length; i ++) {
+      var img = arr[i];
+      var url = img.images.low_resolution.url;
+      console.log(url)
+      array.push(url) 
+    }
+      for(i =0; i < array.length; i++){
+      state.homeArray.push(<img src={array[i]}/>)
+    }
+
+ 
+
+
+
+  })
+   var greeting = ""
 
     if(state.searchQuery) {
       greeting = "Hello "+state.searchQuery+"!"
@@ -84,16 +108,24 @@ var HomeView = React.createClass({
       greeting = "Hello Nobody. :("
     }
 
+    console.log(state.homeArray)
+
     return (
       <div>
         <header id="header">
           {greeting}
         </header>
 
-        <SearchView />  
+        <SearchView />
+         <div>
+            {state.homeArray}
+           </div>  
       </div>
       )
   }
+
+
+
 });
 
 var AppView = React.createClass({
