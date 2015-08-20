@@ -4,6 +4,15 @@ var cookieParser = require('cookie-parser');
 var ejs = require('ejs');
 var app = express();
 var expressLayouts = require('express-ejs-layouts')
+var bodyParser = require('body-parser');
+var keywordExtractor = require('keyword-extractor');
+var _ = require('lodash');
+var React = require('react');
+// ReactApp = React.createFactory(require('../components/ReactApp'));
+
+//var reactHtml = React.renderToString(App({})); // make html to send to client
+// res.render('index.ejs', {reactOutput: reactHtml}); // give template html
+
 
 app.set('view engine', 'ejs');
 app.set('layout', 'layout');
@@ -12,12 +21,59 @@ app.set('layout', 'layout');
 app.use(expressLayouts)
 app.use(express.static(__dirname + '/public'));
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.get('/', function(request, response) {
   response.render('index.ejs', {layout: 'layout'},
     function(err, html){
       response.send(html);
     });
 });
+
+app.post('/stopwords', function(request, response) {
+  var counts = _.countBy(keywordExtractor.extract(request.body.lyrics),function(word) {
+    return word;
+  })
+  var sorted = _.sortBy(_.pairs(counts),function(w){
+    return w[1];
+  }).reverse()
+
+
+
+  //F
+
+
+  //console.log(sorted.length)
+  // var ignore = sorted.indexOf("*******");
+  // var ignore1 = sorted.indexOf("commercial");
+  // var ignore2 = sorted.indexOf("lyrics");
+  // if(ignore != -1 || ignore1 != -1 || ignore2 != -1) {
+  //   sorted.splice(i, 1);
+  // }
+  // console.log(sorted)
+
+  // for(var i = 0; i < sorted.length; i++) {
+  //   var sort = sorted[i];
+  //   console.log(sort)
+  
+  //   if(sort == "*******" || sort == "commercial" || sort == "lyrics")
+  //     console.log("test")
+  // }
+
+  var wordlist = _.map(sorted,function(pair){
+    return pair[0];
+  }).slice(0, 9)
+  console.log(wordlist);
+  response.json(wordlist)
+
+})
+
+// app.get('/react', function(request, response) {
+//   React.render (
+//     <h1>Hello World!</h1>
+//     )
+// })
 
 app.get('/signup', function(request, response) {
   response.render('signup.ejs', {layout: 'layout'},

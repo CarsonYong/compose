@@ -12,12 +12,21 @@
     "url": ""
   },
   "dependencies": {
-    "express": "*",
-    "querystring": "*",
+    "body-parser": "^1.13.3",
     "cookie-parser": "*",
+    "echojs": "*",
     "ejs": "*",
+    "express": "*",
     "express-ejs-layouts": "*",
+    "jquery": "*",
+    "jsdom": "*",
+    "keyword-extractor": "0.0.12",
+    "lodash": "^3.10.1",
+    "najax": "*",
     "node-sass": "*",
+    "querystring": "*",
+    "react": "^0.13.3",
+    "react-tools": "^0.13.3",
     "supervisor": "*"
   }
 }
