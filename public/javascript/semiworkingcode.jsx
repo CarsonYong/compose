@@ -50,27 +50,30 @@ var state = {
 
   getLyrics: function() {
 
-    var getImages = function(words){
+    var callbck = function(data){
+      console.log(arrayWords)
+      if(i < arrayWords.length){
+        i++
+        console.log(data)
+      var word = arrayWords[i];
 
-      if(words.length){
-        var word = words.pop();
-        $.ajax({
-          url: "https://api.instagram.com/v1/tags/"+word+"/media/recent?client_id=6b57da6cc49c4e2ca5af262214decb93",
-          method: "GET",
-          dataType: 'jsonp'
-        }).success(function(data){
-          arr = data.data;
-          for(var i = 0; i< arr.length; i ++) {
-            var img = arr[i];
-            var url = img.images.low_resolution.url;
-            state.instaArr.push(url) 
-          }
-          getImages(words)
-        })
-      } else {
-          state.updateImgURL(state.instaArr)
-
+      $.ajax({
+        url: "https://api.instagram.com/v1/tags/"+word+"/media/recent?client_id=6b57da6cc49c4e2ca5af262214decb93",
+        method: "GET",
+        dataType: 'jsonp'
+      }).success(callbck)
+    } else {
+      arr = data.data;
+      console.log(arr)
+      for(var i = 0; i< arr.length; i ++) {
+        var img = arr[i];
+        var url = img.images.low_resolution.url;
+        state.instaArr.push(url)
+        
       }
+      console.log(state.instaArr.length)
+      state.updateImgURL(state.instaArr)
+    }
       
     }
 
@@ -96,9 +99,25 @@ var state = {
               dataType: 'json',
               data: {lyrics:lyrics}
             }).success(function(data){
-              arrayWords = data
+              arrayWords.push(data)
               $(".floated-img").empty();
-              getImages(arrayWords)
+              var word = data[0];
+              console.log(word)
+              $.ajax({
+                url: "https://api.instagram.com/v1/tags/"+word+"/media/recent?client_id=6b57da6cc49c4e2ca5af262214decb93",
+                method: "GET",
+                dataType: 'jsonp'
+              }).done(callbck)
+              
+              
+
+
+              
+          console.log("finish")
+       
+              //state.updateImgURL(array)
+              // state.updateImgURL(state.instaArr)
+              // console.log(state.updateImgURL)
           })
         })
 

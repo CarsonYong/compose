@@ -46,7 +46,7 @@ var SearchView = React.createClass({
 
 var PlayerView = React.createClass({
   render: function() {
-    console.log(state.instaArr)
+    console.log(state.instaArr.length)
       return  (
 
       <div>
