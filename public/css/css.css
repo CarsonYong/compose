@@ -71,6 +71,7 @@
   box-sizing: border-box;
   justify-content: center;
   background-attachment: fixed;
+  background-color: #1d1d1d;
 }
 
 /* Background */
@@ -343,4 +344,3 @@
    margin-left: -2125px;
  }
 }
-
