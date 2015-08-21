@@ -28,6 +28,8 @@ $(document).ready(function() {
   $("button").click(function(e) {
     e.preventDefault()
     $("#search-results").toggleClass("active");
+    $(".landing-page").toggleClass("active");
+    $(".landing-page #homepage-heading").remove();
     var searchQuery = $("#search-input").val();
 
    $.ajax({
