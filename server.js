@@ -33,14 +33,7 @@ app.post('/stopwords', function(request, response) {
   var sorted = _.sortBy(_.pairs(counts),function(w){
     return w[1];
   }).reverse()
-  //console.log(sorted.length)
-  // var ignore = sorted.indexOf("*******");
-  // var ignore1 = sorted.indexOf("commercial");
-  // var ignore2 = sorted.indexOf("lyrics");
-  // if(ignore != -1 || ignore1 != -1 || ignore2 != -1) {
-  //   sorted.splice(i, 1);
-  // }
-  // console.log(sorted)
+
 
   for(var i = 0; i < sorted.length; i++) {
     var sort = sorted[i];
