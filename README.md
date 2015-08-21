@@ -5,6 +5,6 @@ Compose is a music application that lets you visualize your favourite songs with
 
 ## Install
 ```shell
-$ https://github.com/CarsonYong/compose.git
+$ git clone https://github.com/CarsonYong/compose.git
 $ cd compose
 $ npm install
