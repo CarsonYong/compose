@@ -238,15 +238,19 @@
 }
 
 #songs li {
+    background-color: #2e2f33;
+    padding: 2%;
+    margin: 3% 0%;
+}
+
+#artist li {
+  background-color: #2e2f33;
+  padding: 2%;
   margin: 3% 0%;
 }
 
-#song_results {
-  margin: 0.5%;
-}
-
 #search-results li:hover {
-  color: #ebb91c;
+  background-color: #46484e;
 }
 
 #search-results .bold {
@@ -254,9 +258,8 @@
 }
 
 .list {
-  background-color: #2e2f33;
   font-family: NeutraThin;
-  font-size: 1.5em;
+  font-size: 1.2em;
   margin-left:auto;
   margin-right: auto;
   margin-top: 2%;
