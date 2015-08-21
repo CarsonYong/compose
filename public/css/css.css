@@ -198,7 +198,7 @@
   position: absolute;
   z-index: 1;
   background-color: #1d1d1d;
-  display: block;
+  display: none;
   width: 80%;
   max-width: 400px;
   margin-left: 16%;
