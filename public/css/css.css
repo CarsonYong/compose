@@ -25,9 +25,9 @@
     font-style: normal;
 }
 
-* {
+/* * {
   border: 1px solid red;
-}
+} */
 
 .page-content {
   display: flex;
@@ -210,11 +210,15 @@
   border-left: 1px solid #161515;
   color: #fbfbfc;
   box-shadow: 5px 5px 5px rgba(255,255,255,0.2);
+  transition: all 1s;
 }
 
-#search-form:hover + #search-results {
- display: block;
+
+/* search results drop down transition */
+#search-results.active {
+  display: block;
 }
+
 
 #search-results p {
   font-family: NeutraBold;
@@ -245,6 +249,10 @@
   color: #ebb91c;
 }
 
+#search-results .bold {
+  font-family: Neutra;
+}
+
 .list {
   background-color: #2e2f33;
   font-family: NeutraThin;
@@ -263,11 +271,6 @@
 .list img {
   border-radius: 50%;
   background-color: #ebb91c;
-}
-
-.list li:nth-child(even) {
-  font-family: Neutra;
-  font-size: 0.8em;
 }
 
 

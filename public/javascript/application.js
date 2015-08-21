@@ -1,7 +1,7 @@
 $(document).ready(function() {
   $(".floated-img").empty();
   $.ajax({
-    url: "https://api.instagram.com/v1/tags/lovemusic/media/recent?client_id=",
+    url: "https://api.instagram.com/v1/tags/lovemusic/media/recent?client_id=6b57da6cc49c4e2ca5af262214decb93",
     method: "GET",
     dataType: 'jsonp'
   }).success(function(data){
@@ -25,26 +25,9 @@ $(document).ready(function() {
     }
   })
 
-  $.ajax({
-    url: "https://api.instagram.com/v1/tags/lovemusic/media/recent?client_id=",
-    method: "GET",
-    dataType: 'jsonp'
-  }).success(function(data){
-    arr = data.data;
-    for(var i = 0; i< arr.length; i ++) {
-      var img = arr[i];
-      var url = img.images.low_resolution.url;
-      $("<div class='floated-img'><img src='"+url+"'></img></div>").appendTo(".background");
-    }
-  })
-
-
-
-
-
   $("button").click(function(e) {
     e.preventDefault()
-    $("#search-results").css("display","block");
+    $("#search-results").toggleClass("active");
     var searchQuery = $("#search-input").val();
 
    $.ajax({
@@ -83,7 +66,7 @@ $(document).ready(function() {
           .attr('songname', songName)
           .attr('songartist', songArtist)
           .append(
-            $('<span/><br>')
+            $('<span class="bold"/><br>')
               .text(songName))
           .append(
             $('<span/>')
