@@ -12,17 +12,26 @@ $(document).ready(function() {
       $("<div class='floated-img'><img src='"+url+"'></img></div>").appendTo(".background");
     }
   })
+  $.ajax({
+    url: "https://api.instagram.com/v1/tags/awesomemusic/media/recent?client_id=6b57da6cc49c4e2ca5af262214decb93",
+    method: "GET",
+    dataType: 'jsonp'
+  }).success(function(data){
+    arr = data.data;
+    for(var i = 0; i< arr.length; i ++) {
+      var img = arr[i];
+      var url = img.images.low_resolution.url;
+      $("<div class='floated-img'><img src='"+url+"'></img></div>").appendTo(".background");
+    }
+  })
 
 
-//var stopwords = []
   $("button").click(function(e) {
     e.preventDefault()
     var searchQuery = $("#search-input").val();
-    // console.log(searchQuery)
-    // alert(searchQuery);
 
    $.ajax({
-    url: "https://api.spotify.com/v1/search?q="+searchQuery+"&type=artist,track,album&limit=3", 
+    url: "https://api.spotify.com/v1/search?q="+searchQuery+"&type=artist,track,album&limit=3",
      method:'get',
      dataType: 'json',
      error: function (xhr, ajaxOptions, thrownError) {
@@ -35,16 +44,13 @@ $(document).ready(function() {
         var album = albums[i];
         var albumID = album.id
         var albumName = album.name
-        console.log("Album ID: " + albumID + " -- Album Name: "+ albumName );
       }
-    
       var artists = (data.artists.items)
       for(var i = 0; i < artists.length; i++) {
         var artist = artists[i];
         var artistId = artist.id;
         var artistName = artist.name;
         $("<li>"+artistName+"</li>").appendTo("#artist");
-        console.log("Artist ID: " + artistId + " -- Artist Name: "+ artistName);
       }
       var songs = (data.tracks.items)
       for(var i = 0; i < songs.length; i++ ) {
@@ -52,24 +58,21 @@ $(document).ready(function() {
         var songId = song.id;
         var songName = song.name;
         var songArtist = song.artists[0].name;
-        $("<li id="+songId+" songName="+songName+" songArtist="+songArtist+">"+songName+"</li>").appendTo("#songs");
-        $("<li id="+songId+" songName="+songName+" songArtist="+songArtist+">"+songArtist+"</li>").appendTo("#songs");
-         //console.log("Song ID: " + songId + " -- Song Name: "+ songName+ " -- Artist: "+ songArtist)
-
+        $("#songs").append("<li class='song_results'>" +
+                           "<span id="+songId+" songName="+songName+" songArtist="+songArtist+">"+songName+"</span>" +
+                           "<br />" +
+                           "<span id="+songId+" songName="+songName+" songArtist="+songArtist+">"+songArtist+"</span>" +
+                           "</li>");
       }
 
       $("#"+songId).click(function(e){
-
-
         var songId = ($(this).attr('id'));
-        console.log(songId)
-        var songName = $(this).attr('songName');
-        var songArtist = $(this).attr('songArtist');
-        console.log(songId)
-        console.log(songName)
-        console.log(songArtist)
-
-
+               console.log(songId)
+               var songName = encodeURIComponent($(this).attr('songName'));
+               var songArtist = encodeURIComponent($(this).attr('songArtist'));
+               console.log(songId)
+               console.log(songName)
+               console.log(songArtist)
 
       $('<iframe src="https://embed.spotify.com/?uri=spotify:track:'+songId+'" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>').appendTo(".navbar");
       //Make ajax call for musixmatch song id number

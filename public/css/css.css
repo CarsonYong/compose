@@ -25,9 +25,9 @@
     font-style: normal;
 }
 
-/** {
+* {
   border: 1px solid red;
-}*/
+}
 
 .page-content {
   display: flex;
@@ -212,9 +212,9 @@
   box-shadow: 5px 5px 5px rgba(255,255,255,0.2);
 }
 
-/*#search-form:hover + #search-results {
+#search-form:hover + #search-results {
  display: block;
-}*/
+}
 
 #search-results p {
   font-family: NeutraBold;
@@ -227,12 +227,22 @@
 #search-results ul {
   border-radius: 5px;
   margin-bottom: 4%;
-}
-
-#search-results ul a {
   text-decoration: none;
   display: block;
   color: #fbfbfc;
+  padding: 0;
+}
+
+#songs li {
+  margin: 3% 0%;
+}
+
+#song_results {
+  margin: 0.5%;
+}
+
+#search-results li:hover {
+  color: #ebb91c;
 }
 
 .list {
@@ -255,13 +265,9 @@
   background-color: #ebb91c;
 }
 
-.list li:first-of-type {
+.list li:nth-child(even) {
   font-family: Neutra;
   font-size: 0.8em;
-}
-
-#search-results ul:hover {
-  background-color: #46484e;
 }
 
 
@@ -313,4 +319,3 @@
    margin-left: -2125px;
  }
 }
-
