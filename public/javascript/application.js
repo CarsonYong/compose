@@ -13,16 +13,33 @@ $(document).ready(function() {
     }
   })
 
+  $.ajax({
+    url: "https://api.instagram.com/v1/tags/lovemusic/media/recent?client_id=",
+    method: "GET",
+    dataType: 'jsonp'
+  }).success(function(data){
+    arr = data.data;
+    for(var i = 0; i< arr.length; i ++) {
+      var img = arr[i];
+      var url = img.images.low_resolution.url;
+      $("<div class='floated-img'><img src='"+url+"'></img></div>").appendTo(".background");
+    }
+  })
+
+
+
+
 
 //var stopwords = []
   $("button").click(function(e) {
     e.preventDefault()
+    $("#search-results").css("display","block");
     var searchQuery = $("#search-input").val();
     // console.log(searchQuery)
     // alert(searchQuery);
 
    $.ajax({
-    url: "https://api.spotify.com/v1/search?q="+searchQuery+"&type=artist,track,album&limit=1", 
+    url: "https://api.spotify.com/v1/search?q="+searchQuery+"&type=artist,track,album&limit=3", 
      method:'get',
      dataType: 'json',
      error: function (xhr, ajaxOptions, thrownError) {
@@ -53,18 +70,22 @@ $(document).ready(function() {
         var songId = song.id;
         var songName = song.name;
         var songArtist = song.artists[0].name;
-        $("<li/>", {
-          id:songId,
-          songname:songName,
-          songartist:songArtist,
-          text:songName}).appendTo("#songs");
-        $("<li id="+songId+" songName="+songName+" songArtist="+songArtist+">"+songArtist+"</li>").appendTo("#songs");
-         //console.log("Song ID: " + songId + " -- Song Name: "+ songName+ " -- Artist: "+ songArtist)
 
-      }
+      $('#songs').append(     
+        $('<li/>')
+          .attr('id', songId)                                                                           
+          .attr('songname', songName)                                                      
+          .attr('songartist', songArtist)                                                                                     
+          .append(                                                                                 
+            $('<span/><br>')
+              .text(songName))                                                
+          .append(                                                                                 
+            $('<span/>')                                                                                                                         
+              .text(songArtist)));
+      
 
       $("#"+songId).click(function(e){
-
+        
 
         var songId = ($(this).attr('id'));
         console.log(songId)
@@ -79,7 +100,7 @@ $(document).ready(function() {
       $('<iframe src="https://embed.spotify.com/?uri=spotify:track:'+songId+'" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>').appendTo(".navbar");
       //Make ajax call for musixmatch song id number
       $.ajax({
-        url:"http://developer.echonest.com/api/v4/song/search?api_key=&artist="+songArtist+"&title="+songName+"&results=11&bucket=tracks&bucket=id:musixmatch-WW",
+        url:"http://developer.echonest.com/api/v4/song/search?api_key=&artist="+songArtist+"&title="+songName+"&results=11&bucket=tracks&bucket=id:musixmatch-WW&limit=true",
         method: 'get',
         dataType: 'json'
         }).success(function(html){
@@ -125,7 +146,8 @@ $(document).ready(function() {
             })
           }) // End Lyrics
         })
-       })
+       }) //End of for loop from song results
+      }
       }
     })
   })
