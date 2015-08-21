@@ -59,7 +59,8 @@ app.get('/signup', function(request, response) {
 })
 
 app.get('/player', function(request, response) {
-  response.render('player.ejs', {layout: 'layout'},
+  console.log(request.query)
+  response.render('player.ejs', {layout: 'layout', songid: request.query.songId, songName: request.query.songName, songArtist: request.query.songArtist},
     function(err, html){
       response.send(html);
     });
