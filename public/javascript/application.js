@@ -10,7 +10,7 @@ $(document).ready(function() {
   $('<iframe src="https://embed.spotify.com/?uri=spotify:track:'+songId+'" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>').appendTo(".navbar");
         //Make ajax call for musixmatch song id number
         $.ajax({
-          url:"http://developer.echonest.com/api/v4/song/search?api_key=&artist="+songArtist+"&title="+songName+"&results=11&bucket=tracks&bucket=id:musixmatch-WW&limit=true",
+          url:"http://developer.echonest.com/api/v4/song/search?api_key=FZBHWASTWJKMBT0CU&artist="+songArtist+"&title="+songName+"&results=11&bucket=tracks&bucket=id:musixmatch-WW&limit=true",
           method: 'get',
           dataType: 'json'
           }).success(function(html){
@@ -23,7 +23,7 @@ $(document).ready(function() {
             console.log(id)
             // Start Lyrics
             $.ajax({
-              url: "http://api.musixmatch.com/ws/1.1/track.lyrics.get?apikey=&track_id="+id+"&format=jsonp",
+              url: "http://api.musixmatch.com/ws/1.1/track.lyrics.get?apikey=c1652e120f3e1c24a918c09c65b219a9&track_id="+id+"&format=jsonp",
               method: 'get',
               dataType: 'jsonp'
             }).success(function(html){
@@ -41,7 +41,7 @@ $(document).ready(function() {
                 for(var i = 0; i < data.length; i ++) {
                   var word = data[i];
                   $.ajax({
-                    url: "https://api.instagram.com/v1/tags/"+data[i]+"/media/recent?client_id=",
+                    url: "https://api.instagram.com/v1/tags/"+data[i]+"/media/recent?client_id=6b57da6cc49c4e2ca5af262214decb93",
                     method: "GET",
                     dataType: 'jsonp'
                   }).success((function(num){
@@ -87,7 +87,7 @@ $(document).ready(function() {
     })
 
     $.ajax({
-      url: "https://api.instagram.com/v1/tags/lovemusic/media/recent?client_id=",
+      url: "https://api.instagram.com/v1/tags/lovemusic/media/recent?client_id=6b57da6cc49c4e2ca5af262214decb93",
       method: "GET",
       dataType: 'jsonp'
     }).success(function(data){
@@ -114,7 +114,7 @@ $(document).ready(function() {
     $("button").click(function(e) {
       e.preventDefault()
       $("#songs").empty();
-      $("#artists").empty();
+      $("#artist").empty();
       $("#albums").empty();
       $("#search-results").css("display","block");
       var searchQuery = $("#search-input").val();
