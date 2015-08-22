@@ -4,11 +4,10 @@ $(document).ready(function() {
     var songId = $(this).attr('songId')
     var songName = $(this).attr('songName');
     var songArtist = $(this).attr('songArtist')
-    console.log(songId)
-    console.log(songName)
-    console.log(songArtist)
-;
-  $('<iframe src="https://embed.spotify.com/?uri=spotify:track:'+songId+'" width="300" height="380" frameborder="0" allowtransparency="true" id="spotify"></iframe>').appendTo(".spotify-player");
+    $("#play-btn").addClass("active");
+
+  // $('<iframe src="https://embed.spotify.com/?uri=spotify:track:'+songId+'" width="300" height="380" frameborder="0" allowtransparency="true" id="spotify"></iframe>').appendTo(".spotify-player");
+  $('<iframe src="https://embed.spotify.com/?uri=spotify:track:'+songId+'" width="300" height="80" frameborder="0" allowtransparency="true" id="spotify"></iframe>').appendTo(".navbar");
         //Make ajax call for musixmatch song id number
         $.ajax({
           url:"http://developer.echonest.com/api/v4/song/search?api_key=FZBHWASTWJKMBT0CU&artist="+songArtist+"&title="+songName+"&results=11&bucket=tracks&bucket=id:musixmatch-WW&limit=true",
@@ -64,7 +63,11 @@ $(document).ready(function() {
               })
             }) // End Lyrics
           })
+  })
 
+  $("#play-btn").on("click", function() {
+    console.log("test");
+    $("#spotify").toggleClass("active");
   })
 
   $('.background-wrapper').each(function(){
@@ -96,8 +99,6 @@ $(document).ready(function() {
       }
     })
 
-
-  //var stopwords = []
   $('#player').each(function(){
     var songId = $(this).attr('songId');
     console.log(songId)
@@ -134,7 +135,6 @@ $(document).ready(function() {
           var album = albums[i];
           var albumID = album.id
           var albumName = album.name
-          console.log("Album ID: " + albumID + " -- Album Name: "+ albumName );
         }
 
         var artists = (data.artists.items)
@@ -143,7 +143,6 @@ $(document).ready(function() {
           var artistId = artist.id;
           var artistName = artist.name;
           $("<li>"+artistName+"</li>").appendTo("#artist");
-          console.log("Artist ID: " + artistId + " -- Artist Name: "+ artistName);
         }
         var songs = (data.tracks.items)
         for(var i = 0; i < songs.length; i++ ) { //Beginning song
@@ -152,6 +151,7 @@ $(document).ready(function() {
           var songName = song.name;
           var songArtist = song.artists[0].name;
 
+// songs are appended to the drop down list
         $('#songs').append(
           $('<li/>')
             .attr('id', songId)
@@ -164,20 +164,16 @@ $(document).ready(function() {
               $('<span/>')
                 .text(songArtist)));
 
-
+// when song is click, goes to player page
         $("#"+songId).click(function(e){
-
-
+          e.preventDefault
           var songId = ($(this).attr('id'));
-          console.log(songId)
           var songName = encodeURIComponent($(this).attr('songName'));
           var songArtist = encodeURIComponent($(this).attr('songArtist'));
-          console.log(songId)
-          console.log(songName)
-          console.log(songArtist)
 
-
-
+          // $(".navbar li.homepage-nav").addClass("active");
+          $(".navbar li.homepage-nav").hide();
+          // $(".navbar li.player-page-nav").toggleClass("active");
 
           window.location="/player?songId="+songId+"&songName="+songName+"&songArtist="+songArtist;
 
