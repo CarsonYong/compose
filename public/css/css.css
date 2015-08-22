@@ -140,6 +140,8 @@
 #search-icon {
   font-size: 1.5em;
   float: left;
+  margin-top: 4px;
+  margin-right: 6px;
 }
 
 #search-input-player {
@@ -184,6 +186,10 @@
 
 /* Search Form */
 
+#search-form {
+  display: block;
+}
+
 #search-form button {
   margin-left: 5%;
   position: absolute;
@@ -211,7 +217,7 @@
   max-width: 500px;
   height: 50px;
   padding: 5px;
-  margin: 0 auto;
+  margin-left: 26%;
 }
 
 #search-form input:focus, textarea:focus {
@@ -229,7 +235,7 @@
   opacity: 0;
   width: 80%;
   max-width: 500px;
-  margin: 0 auto;
+  margin-left: 26%;
   padding-top: 2%;
   padding-bottom: 1%;
   border-radius: 5px;

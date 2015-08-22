@@ -6,11 +6,22 @@ $(document).ready(function() {
     var songArtist = $(this).attr('songArtist')
 
     // addd play button to player screen
-    $("#play-btn").addClass("active");
+    $("#play-btn").toggleClass("active");
 
     // hides certain parts of the navbar depending on page
-    $(".navbar li.homepage-nav").addClass("active");
+    $(".navbar li.homepage-nav").toggleClass("active");
     $(".navbar li.player-page-nav").toggleClass("active");
+
+    // spotify and play button to appear and remove on hover
+    $("#play-btn").on("mouseenter", function() {
+      $("#spotify").toggleClass("active");
+      $("#play-btn").toggleClass("active");
+    })
+
+    $("#spotify").on("mouseleave", function() {
+      $("#spotify").removeClass("active");
+      $("#play-btn").addClass("active");
+    })
 
   $('<iframe src="https://embed.spotify.com/?uri=spotify:track:'+songId+'" width="300" height="80" frameborder="0" allowtransparency="true" id="spotify"></iframe>').appendTo(".navbar");
         //Make ajax call for musixmatch song id number
@@ -68,16 +79,6 @@ $(document).ready(function() {
               })
             }) // End Lyrics
           })
-  })
-
-  $("#play-btn").on("mouseenter", function() {
-    $("#spotify").toggleClass("active");
-    $("#play-btn").toggleClass("active");
-  })
-
-  $("#spotify").on("mouseleave", function() {
-    $("#spotify").removeClass("active");
-    $("#play-btn").addClass("active");
   })
 
   $('.background-wrapper').each(function(){
