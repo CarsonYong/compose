@@ -330,3 +330,17 @@
    margin-left: -2125px;
  }
 }
+
+
+/* Spotify Player */
+
+#spotify {
+  box-shadow: 5px 5px 5px rgba(29,29,29,0.8);
+}
+
+.spotify-player {
+/*   width: 100%; */
+  position: absolute;
+  left: 40%;
+  margin: 16% auto;
+}

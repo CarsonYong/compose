@@ -7,8 +7,8 @@ $(document).ready(function() {
     console.log(songId)
     console.log(songName)
     console.log(songArtist)
-
-  $('<iframe src="https://embed.spotify.com/?uri=spotify:track:'+songId+'" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>').appendTo(".navbar");
+;
+  $('<iframe src="https://embed.spotify.com/?uri=spotify:track:'+songId+'" width="300" height="380" frameborder="0" allowtransparency="true" id="spotify"></iframe>').appendTo(".spotify-player");
         //Make ajax call for musixmatch song id number
         $.ajax({
           url:"http://developer.echonest.com/api/v4/song/search?api_key=FZBHWASTWJKMBT0CU&artist="+songArtist+"&title="+songName+"&results=11&bucket=tracks&bucket=id:musixmatch-WW&limit=true",
