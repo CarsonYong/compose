@@ -103,13 +103,20 @@ $(document).ready(function() {
     console.log(songId)
   })
 
+  // $(window).on("click", function() {
+  //   $("#search-results").removeClass("active");
+  //   $(".landing-page").removeClass("active");
+  //   $(".landing-page #homepage-heading").show();
+  // })
+
   $("button").click(function(e) {
     e.preventDefault()
+    e.stopPropagation()
     $("#songs").empty();
     $("#artist").empty();
-    $("#search-results").toggleClass("active");
-    $(".landing-page").toggleClass("active");
-    $(".landing-page #homepage-heading").remove();
+    $("#search-results").addClass("active");
+    $(".landing-page").addClass("active");
+    $(".landing-page #homepage-heading").hide();
     var searchQuery = $("#search-input").val();
 
      $.ajax({
