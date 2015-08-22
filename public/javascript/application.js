@@ -4,9 +4,14 @@ $(document).ready(function() {
     var songId = $(this).attr('songId')
     var songName = $(this).attr('songName');
     var songArtist = $(this).attr('songArtist')
+
+    // addd play button to player screen
     $("#play-btn").addClass("active");
 
-  // $('<iframe src="https://embed.spotify.com/?uri=spotify:track:'+songId+'" width="300" height="380" frameborder="0" allowtransparency="true" id="spotify"></iframe>').appendTo(".spotify-player");
+    // hides certain parts of the navbar depending on page
+    $(".navbar li.homepage-nav").addClass("active");
+    $(".navbar li.player-page-nav").toggleClass("active");
+
   $('<iframe src="https://embed.spotify.com/?uri=spotify:track:'+songId+'" width="300" height="80" frameborder="0" allowtransparency="true" id="spotify"></iframe>').appendTo(".navbar");
         //Make ajax call for musixmatch song id number
         $.ajax({
@@ -175,10 +180,6 @@ $(document).ready(function() {
           var songId = ($(this).attr('id'));
           var songName = encodeURIComponent($(this).attr('songName'));
           var songArtist = encodeURIComponent($(this).attr('songArtist'));
-
-          // $(".navbar li.homepage-nav").addClass("active");
-          $(".navbar li.homepage-nav").hide();
-          // $(".navbar li.player-page-nav").toggleClass("active");
 
           window.location="/player?songId="+songId+"&songName="+songName+"&songArtist="+songArtist;
 

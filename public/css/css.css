@@ -118,21 +118,21 @@
   color: #ebb91c;
 }
 
-/* .navbar li.homepage-nav {
+.navbar li.homepage-nav {
   display: block;
 }
 
 .navbar li.homepage-nav.active {
   display: none;
-} */
+}
 
-/* .navbar li.player-page-nav {
+.navbar li.player-page-nav {
   display: none;
-} */
+}
 
-/* .navbar li.player-page-nav.active {
+.navbar li.player-page-nav.active {
   display: block;
-} */
+}
 
 
 /* navbar for player to have Neurta text and color #1d1d1d */
