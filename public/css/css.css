@@ -360,11 +360,14 @@
   margin-left: 47%;
   margin-top: 24px;
   position: absolute;
-  display: none;
+  display: block;
+  opacity: 0;
+  transition: all 0.5s;
+  text-shadow: 0 0 3px rgb(0, 0, 0), 0 0 15px rgb(0, 0, 0);
 }
 
 #play-btn.active {
-  display: block;
+  opacity: 1;
 }
 
 #spotify {
@@ -375,5 +378,5 @@
 }
 
 #spotify.active {
-  display: block:
+  display: block;
 }

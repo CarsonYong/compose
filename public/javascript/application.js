@@ -65,9 +65,14 @@ $(document).ready(function() {
           })
   })
 
-  $("#play-btn").on("click", function() {
-    console.log("test");
+  $("#play-btn").on("mouseenter", function() {
     $("#spotify").toggleClass("active");
+    $("#play-btn").toggleClass("active");
+  })
+
+  $("#spotify").on("mouseleave", function() {
+    $("#spotify").removeClass("active");
+    $("#play-btn").addClass("active");
   })
 
   $('.background-wrapper').each(function(){
