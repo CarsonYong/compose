@@ -26,11 +26,16 @@
 }
 
 /* * {
-  border: 1px solid red;
+ border: 1px solid red;
 } */
 
 * {
   box-sizing: border-box;
+}
+
+.container {
+  height: 100vh;
+  overflow-y: hidden;
 }
 
 .page-content {
@@ -118,21 +123,21 @@
   color: #ebb91c;
 }
 
-/* .navbar li.homepage-nav {
+.navbar li.homepage-nav {
   display: block;
 }
 
 .navbar li.homepage-nav.active {
   display: none;
-} */
+}
 
-/* .navbar li.player-page-nav {
+.navbar li.player-page-nav {
   display: none;
-} */
+}
 
-/* .navbar li.player-page-nav.active {
+.navbar li.player-page-nav.active {
   display: block;
-} */
+}
 
 
 /* navbar for player to have Neurta text and color #1d1d1d */
@@ -140,6 +145,8 @@
 #search-icon {
   font-size: 1.5em;
   float: left;
+  margin-top: 4px;
+  margin-right: 6px;
 }
 
 #search-input-player {
@@ -170,7 +177,7 @@
 }
 
 .landing-page.active {
-  margin: 0;
+  margin-top: 0;
 }
 
 .landing-page h1 {
@@ -183,6 +190,10 @@
 
 
 /* Search Form */
+
+#search-form {
+  display: block;
+}
 
 #search-form button {
   margin-left: 5%;
@@ -211,7 +222,7 @@
   max-width: 500px;
   height: 50px;
   padding: 5px;
-  margin: 0 auto;
+  margin-left: 26%;
 }
 
 #search-form input:focus, textarea:focus {
@@ -229,7 +240,7 @@
   opacity: 0;
   width: 80%;
   max-width: 500px;
-  margin: 0 auto;
+  margin-left: 26%;
   padding-top: 2%;
   padding-bottom: 1%;
   border-radius: 5px;
@@ -360,20 +371,27 @@
   margin-left: 47%;
   margin-top: 24px;
   position: absolute;
-  display: none;
+  display: block;
+  opacity: 0;
+  transition: all 0.5s;
+  text-shadow: 0 0 3px rgb(0, 0, 0), 0 0 15px rgb(0, 0, 0);
 }
 
 #play-btn.active {
-  display: block;
+  opacity: 1;
 }
 
 #spotify {
   box-shadow: 5px 5px 5px rgba(29,29,29,0.8);
+}
+
+#spotify-player {
+  position: absolute;
   margin-left: 38%;
-  margin-top: -10px;
+  margin-top: 19px;
   display: none;
 }
 
-#spotify.active {
+#spotify-player.active {
   display: block;
 }
