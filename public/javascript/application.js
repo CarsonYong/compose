@@ -13,17 +13,30 @@ $(document).ready(function() {
     $(".navbar li.player-page-nav").toggleClass("active");
 
     // spotify and play button to appear and remove on hover
+    // $("#play-btn").on("mouseenter", function() {
+    //   $("#spotify").toggleClass("active");
+    //   $("#play-btn").toggleClass("active");
+    // })
+    //
+    // $("#spotify").on("mouseleave", function() {
+    //   console.log("test");
+    //   $("#play-btn").toggleClass("active");
+    //   $("#spotify").toggleClass("active");
+    // })
+
     $("#play-btn").on("mouseenter", function() {
-      $("#spotify").toggleClass("active");
-      $("#play-btn").toggleClass("active");
+      console.log("mouse has entered");
+      $("#spotify-player").addClass("active");
+      $("#play-btn").removeClass("active");
     })
 
-    $("#spotify").on("mouseleave", function() {
-      $("#spotify").removeClass("active");
+    $("#spotify-player").on("mouseout", function() {
+      console.log("mouse left");
       $("#play-btn").addClass("active");
+      $("#spotify-player").removeClass("active");
     })
 
-  $('<iframe src="https://embed.spotify.com/?uri=spotify:track:'+songId+'" width="300" height="80" frameborder="0" allowtransparency="true" id="spotify"></iframe>').appendTo(".navbar");
+  $('<iframe src="https://embed.spotify.com/?uri=spotify:track:'+songId+'" width="300" height="80" frameborder="0" allowtransparency="true" id="spotify"></iframe>').appendTo("#spotify-player");
         //Make ajax call for musixmatch song id number
         $.ajax({
           url:"http://developer.echonest.com/api/v4/song/search?api_key=FZBHWASTWJKMBT0CU&artist="+songArtist+"&title="+songName+"&results=11&bucket=tracks&bucket=id:musixmatch-WW&limit=true",
