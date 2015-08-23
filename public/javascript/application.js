@@ -13,7 +13,7 @@ $(document).ready(function() {
     songArtist = songArtist;
     songName = songName;
     $.ajax({
-      url:"http://developer.echonest.com/api/v4/song/search?api_key=&artist="+songArtist+"&title="+songName+"&results=11&bucket=tracks&bucket=id:musixmatch-WW&limit=true",
+      url:"http://developer.echonest.com/api/v4/song/search?api_key=FZBHWASTWJKMBT0CU&artist="+songArtist+"&title="+songName+"&results=11&bucket=tracks&bucket=id:musixmatch-WW&limit=true",
       method: 'get',
       dataType: 'json'
       }).success(function(html){
@@ -26,7 +26,7 @@ $(document).ready(function() {
         console.log(id)
         // Start Lyrics
         $.ajax({
-          url: "http://api.musixmatch.com/ws/1.1/track.lyrics.get?apikey=&track&track_id="+id+"&format=jsonp",
+          url: "http://api.musixmatch.com/ws/1.1/track.lyrics.get?apikey=c1652e120f3e1c24a918c09c65b219a9&track&track_id="+id+"&format=jsonp",
           method: 'get',
           dataType: 'jsonp'
         }).success(function(html){
@@ -54,7 +54,7 @@ $(document).ready(function() {
     for(var i = 0; i < data.length; i ++) {
       var word = data[i];
       $.ajax({
-        url: "https://api.instagram.com/v1/tags/"+data[i]+"/media/recent?client_id=",
+        url: "https://api.instagram.com/v1/tags/"+data[i]+"/media/recent?client_id=6b57da6cc49c4e2ca5af262214decb93",
         method: "GET",
         dataType: 'jsonp'
       }).success((function(num){
@@ -82,25 +82,15 @@ $(document).ready(function() {
 
   $('.background-wrapper').each(function(){
 
-    $(".floated-img").empty();
-    $.ajax({
-      url: "https://api.instagram.com/v1/tags/lovemusic/media/recent?client_id=",
-      method: "GET",
-      dataType: 'jsonp'
-    }).success(function(data){
-      arr = data.data;
-      for(var i = 0; i< arr.length; i ++) {
-        var img = arr[i];
-        var url = img.images.low_resolution.url;
-        $("<div class='floated-img'><img src='"+url+"'></img></div>").appendTo(".background");
-      }
-    })
+    //$(".floated-img").empty();
 
+    function indexInsta(tag){
     $.ajax({
-      url: "https://api.instagram.com/v1/tags/lovemusic/media/recent?client_id=",
+      url: "https://api.instagram.com/v1/tags/"+tag+"/media/recent?client_id=6b57da6cc49c4e2ca5af262214decb93",
       method: "GET",
       dataType: 'jsonp'
     }).success(function(data){
+      console.log(data)
       arr = data.data;
       for(var i = 0; i< arr.length; i ++) {
         var img = arr[i];
@@ -108,6 +98,10 @@ $(document).ready(function() {
         $("<div class='floated-img'><img src='"+url+"'></img></div>").appendTo(".background");
       }
     })
+  }
+  indexInsta("lovemusic");
+  indexInsta("lovemusic");
+  setInterval(function(){indexInsta("lovemusic")},11000);
 
   $('#player').each(function(){
     var songId = $(this).attr('songId');
