@@ -12,9 +12,19 @@
     "url": ""
   },
   "dependencies": {
-    "express": "*",
-    "querystring": "*",
+    "body-parser": "^1.13.3",
     "cookie-parser": "*",
-    "ejs": "*"
+    "echojs": "*",
+    "ejs": "*",
+    "express": "*",
+    "express-ejs-layouts": "*",
+    "jquery": "*",
+    "jsdom": "*",
+    "keyword-extractor": "0.0.12",
+    "lodash": "^3.10.1",
+    "najax": "*",
+    "node-sass": "*",
+    "querystring": "*",
+    "supervisor": "*"
   }
 }

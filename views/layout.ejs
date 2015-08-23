@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="css/css.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <title>Compose</title>
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+    <a id="navbar-brand" href="/">Compose</a>
+    <i id="play-btn" class="fa fa-play-circle-o"></i>
+     <ul>
+       <li class="player-page-nav"><form id="search-player">
+         <label for="search-input-player" id="search-input-player-label"><i id="search-icon" class="fa fa-search"></i></label>
+         <input type="text" name="search-input-player" class="arrow_box" id="search-input-player" placeholder="Search for more music">
+       </form></li>
+<!--          </ul>
+        <li class="homepage-nav">SIGN UP</li>
+       <li class="homepage-nav">LOGIN</li>
+       <li class="player-page-nav">LOGOUT</li> -->
+     </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+
+    <%- body %>
+
+  </div>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="/javascript/application.js"></script>
+
+</body>
+</html>
