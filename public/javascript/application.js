@@ -5,9 +5,10 @@ $(document).ready(function() {
     var songName = $(this).attr('songName');
     var songArtist = $(this).attr('songArtist')
     var songTag = $(this).attr('songTag')
-    var tagArr = []
-    tagArr.push(songTag)
-    if(tagArr.length > 0){
+    var tagArr = songTag.split(',');
+    console.log(tagArr)
+    //tagArr.push(songTag)
+    if(songTag.length > 0){
       getInsta(tagArr)
     }else {
       getLyrics()
@@ -98,7 +99,6 @@ $(document).ready(function() {
     }
   } // End for getInsta function
   //getLyrics()
-  console.log(songTag)
 })
 
   $('.background-wrapper').each(function(){
@@ -195,9 +195,11 @@ $(document).ready(function() {
           var songId = ($(this).attr('id'));
           var songName = encodeURIComponent($(this).attr('songName'));
           var songArtist = encodeURIComponent($(this).attr('songArtist'));
-          var songTag = encodeURIComponent($(this).attr('songTag'));
+          //var songTag = encodeURIComponent($(this).attr('songTag'));
+          var songTag = "test,test,test"
 
-          window.location="/player?songId="+songId+"&songName="+songName+"&songArtist="+songArtist+"&songTag=";
+
+          window.location="/player?songId="+songId+"&songName="+songName+"&songArtist="+songArtist+"&songTag="+songTag;
 
          }) //End of for loop from song results
         }
