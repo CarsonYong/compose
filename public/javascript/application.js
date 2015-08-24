@@ -4,6 +4,8 @@ $(document).ready(function() {
     var songId = $(this).attr('songId')
     var songName = $(this).attr('songName');
     var songArtist = $(this).attr('songArtist')
+    var songTag = $(this).attr('songTag')
+    console.log(songTag)
 
     // addd play button to player screen
     $("#play-btn").toggleClass("active");
@@ -90,6 +92,7 @@ $(document).ready(function() {
     }
   } // End for getInsta function
   getLyrics()
+  console.log(songTag)
 })
 
   $('.background-wrapper').each(function(){
@@ -186,8 +189,9 @@ $(document).ready(function() {
           var songId = ($(this).attr('id'));
           var songName = encodeURIComponent($(this).attr('songName'));
           var songArtist = encodeURIComponent($(this).attr('songArtist'));
+          var songTag = encodeURIComponent($(this).attr('songTag'));
 
-          window.location="/player?songId="+songId+"&songName="+songName+"&songArtist="+songArtist;
+          window.location="/player?songId="+songId+"&songName="+songName+"&songArtist="+songArtist+"&songTag=";
 
          }) //End of for loop from song results
         }
