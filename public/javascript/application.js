@@ -5,7 +5,13 @@ $(document).ready(function() {
     var songName = $(this).attr('songName');
     var songArtist = $(this).attr('songArtist')
     var songTag = $(this).attr('songTag')
-    console.log(songTag)
+    var tagArr = []
+    tagArr.push(songTag)
+    if(tagArr.length > 0){
+      getInsta(tagArr)
+    }else {
+      getLyrics()
+    }
 
     // addd play button to player screen
     $("#play-btn").toggleClass("active");
@@ -91,7 +97,7 @@ $(document).ready(function() {
       )
     }
   } // End for getInsta function
-  getLyrics()
+  //getLyrics()
   console.log(songTag)
 })
 
