@@ -12,18 +12,6 @@ $(document).ready(function() {
     $(".navbar li.homepage-nav").toggleClass("active");
     $(".navbar li.player-page-nav").toggleClass("active");
 
-    // spotify and play button to appear and remove on hover
-    // $("#play-btn").on("mouseenter", function() {
-    //   $("#spotify").toggleClass("active");
-    //   $("#play-btn").toggleClass("active");
-    // })
-    //
-    // $("#spotify").on("mouseleave", function() {
-    //   console.log("test");
-    //   $("#play-btn").toggleClass("active");
-    //   $("#spotify").toggleClass("active");
-    // })
-
     $("#play-btn").on("mouseenter", function() {
       console.log("mouse has entered");
       $("#spotify-player").addClass("active");
