@@ -9,17 +9,19 @@
     <div class="landing-page">
 
       <h1 id="homepage-heading">Visualise your favourite songs with Compose</h1>
-      
-      <center>
+
         <div id="search-form">
-          <form>
+          <form for="search">
           <input type="text" name="search" id="search-input" value="" autocomplete="off"  placeholder="Search Spotify for an song or artist">
           <button id="main-search-btn">Search</button>
           </form>
         </div>
-      </center>
 
     <div id="search-results">
+      <h6 id="add-more-hashtags">Add more hastags</h6><i id="add-hashtag" class="fa fa-plus-circle"></i>
+      <form for="hashtag">
+        <input type="text" name="hashtag" id="hashtag-input" autocomplete="off"  placeholder="Seperate hashtags with commas">
+      </form>
       <p>SONGS</p>
         <ul id="songs" class="list">
         </ul>
