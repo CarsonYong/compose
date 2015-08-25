@@ -4,6 +4,15 @@ $(document).ready(function() {
     var songId = $(this).attr('songId')
     var songName = $(this).attr('songName');
     var songArtist = $(this).attr('songArtist')
+    var songTag = $(this).attr('songTag')
+    var tagArr = songTag.split(',');
+    console.log(tagArr)
+    //tagArr.push(songTag)
+    if(songTag.length > 0){
+      getInsta(tagArr)
+    }else {
+      getLyrics()
+    }
 
     // addd play button to player screen
     $("#play-btn").toggleClass("active");
@@ -26,83 +35,83 @@ $(document).ready(function() {
 
   $('<iframe src="https://embed.spotify.com/?uri=spotify:track:'+songId+'" width="300" height="80" frameborder="0" allowtransparency="true" id="spotify"></iframe>').appendTo("#spotify-player");
         //Make ajax call for musixmatch song id number
+  function getLyrics(){
+    songArtist = songArtist;
+    songName = songName;
+    $.ajax({
+      url:"http://developer.echonest.com/api/v4/song/search?api_key=FZBHWASTWJKMBT0CU&artist="+songArtist+"&title="+songName+"&results=11&bucket=tracks&bucket=id:musixmatch-WW&limit=true",
+      method: 'get',
+      dataType: 'json'
+      }).success(function(html){
+        var data = (html);
+        console.log(data.response.songs[0])
+        var musixmatchId = data.response.songs[0].foreign_ids[0].foreign_id;
+        console.log(musixmatchId)
+        id = musixmatchId.split("song:")
+        id = parseInt(id[1])
+        console.log(id)
+        // Start Lyrics
         $.ajax({
-          url:"http://developer.echonest.com/api/v4/song/search?api_key=FZBHWASTWJKMBT0CU&artist="+songArtist+"&title="+songName+"&results=11&bucket=tracks&bucket=id:musixmatch-WW&limit=true",
+          url: "http://api.musixmatch.com/ws/1.1/track.lyrics.get?apikey=c1652e120f3e1c24a918c09c65b219a9&track&track_id="+id+"&format=jsonp",
           method: 'get',
-          dataType: 'json'
-          }).success(function(html){
-            var data = (html);
-            console.log(data.response.songs[0])
-            var musixmatchId = data.response.songs[0].foreign_ids[0].foreign_id;
-            console.log(musixmatchId)
-            id = musixmatchId.split("song:")
-            id = parseInt(id[1])
-            console.log(id)
-            // Start Lyrics
-            $.ajax({
-              url: "http://api.musixmatch.com/ws/1.1/track.lyrics.get?apikey=c1652e120f3e1c24a918c09c65b219a9&track&track_id="+id+"&format=jsonp",
-              method: 'get',
-              dataType: 'jsonp'
-            }).success(function(html){
-              console.log(html)
-              var data = (html);
-              var lyrics = data.message.body.lyrics.lyrics_body;
-              console.log(lyrics)
-              $.ajax({
-                url: "/stopwords",
-                method: 'post',
-                dataType: 'json',
-                data: {lyrics:lyrics}
-              }).success(function(data){
-                $(".player-floated-img").empty();
-                for(var i = 0; i < data.length; i ++) {
-                  var word = data[i];
-                  $.ajax({
-                    url: "https://api.instagram.com/v1/tags/"+data[i]+"/media/recent?client_id=6b57da6cc49c4e2ca5af262214decb93",
-                    method: "GET",
-                    dataType: 'jsonp'
-                  }).success((function(num){
+          dataType: 'jsonp'
+        }).success(function(html){
+          console.log(html)
+          var data = (html);
+          var lyrics = data.message.body.lyrics.lyrics_body;
+          console.log(lyrics)
+          $.ajax({
+            url: "/stopwords",
+            method: 'post',
+            dataType: 'json',
+            data: {lyrics:lyrics}
+          }).success(getInsta)
 
-                  return(
-                  function(data){
-                    arr = data.data;
-                    for(var j = 0; j < arr.length; j++) {
-                      var img = arr[j];
-                      var url = img.images.low_resolution.url;
-                      console.log(num)
-                      $(".player-floated-img").eq(num).append($("<img src='"+url+"'></img>"));
-                    }
-                  })
-                })(i)
-
-                  )
-                }
-              })
-            }) // End Lyrics
+                
+      setInterval(getInsta,10000);
+      }) // End Lyrics
+    })
+  }// End for getLyrics function
+  var stopwords
+    function getInsta(data){
+    stopwords = stopwords || data
+    data = data || stopwords
+    //$(".player-floated-img").empty();
+    for(var i = 0; i < data.length; i ++) {
+      var word = data[i];
+      $.ajax({
+        url: "https://api.instagram.com/v1/tags/"+data[i]+"/media/recent?client_id=6b57da6cc49c4e2ca5af262214decb93",
+        method: "GET",
+        dataType: 'jsonp'
+      }).success((function(num){
+          return(
+          function(data){
+            arr = data.data;
+            for(var j = 0; j < arr.length; j++) {
+              var img = arr[j];
+              var url = img.images.low_resolution.url;
+              console.log(num)
+              $(".player-floated-img").eq(num).append($("<img src='"+url+"'></img>"));
+            }
           })
-  })
+        })(i)
+      )
+    }
+  } // End for getInsta function
+  //getLyrics()
+})
 
   $('.background-wrapper').each(function(){
 
-    $(".floated-img").empty();
-    $.ajax({
-      url: "https://api.instagram.com/v1/tags/lovemusic/media/recent?client_id=6b57da6cc49c4e2ca5af262214decb93",
-      method: "GET",
-      dataType: 'jsonp'
-    }).success(function(data){
-      arr = data.data;
-      for(var i = 0; i< arr.length; i ++) {
-        var img = arr[i];
-        var url = img.images.low_resolution.url;
-        $("<div class='floated-img'><img src='"+url+"'></img></div>").appendTo(".background");
-      }
-    })
+    //$(".floated-img").empty();
 
+    function indexInsta(tag){
     $.ajax({
-      url: "https://api.instagram.com/v1/tags/lovemusic/media/recent?client_id=6b57da6cc49c4e2ca5af262214decb93",
+      url: "https://api.instagram.com/v1/tags/"+tag+"/media/recent?client_id=6b57da6cc49c4e2ca5af262214decb93",
       method: "GET",
       dataType: 'jsonp'
     }).success(function(data){
+      console.log(data)
       arr = data.data;
       for(var i = 0; i< arr.length; i ++) {
         var img = arr[i];
@@ -110,6 +119,10 @@ $(document).ready(function() {
         $("<div class='floated-img'><img src='"+url+"'></img></div>").appendTo(".background");
       }
     })
+  }
+  indexInsta("lovemusic");
+  indexInsta("lovemusic");
+  setInterval(function(){indexInsta("lovemusic")},11000);
 
   $('#player').each(function(){
     var songId = $(this).attr('songId');
@@ -182,8 +195,11 @@ $(document).ready(function() {
           var songId = ($(this).attr('id'));
           var songName = encodeURIComponent($(this).attr('songName'));
           var songArtist = encodeURIComponent($(this).attr('songArtist'));
+          //var songTag = encodeURIComponent($(this).attr('songTag'));
+          var songTag = "test,test,test"
 
-          window.location="/player?songId="+songId+"&songName="+songName+"&songArtist="+songArtist;
+
+          window.location="/player?songId="+songId+"&songName="+songName+"&songArtist="+songArtist+"&songTag="+songTag;
 
          }) //End of for loop from song results
         }
