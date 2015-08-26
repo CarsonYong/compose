@@ -250,7 +250,7 @@ input {
   margin-bottom: 5%;
   font-size: 1.5em;
   opacity: 0;
-  transition: all 1s;
+  transition: all 2s;
 }
 
 #hashtag-input.active {
@@ -280,7 +280,7 @@ input {
   border-left: 1px solid #161515;
   color: #fbfbfc;
   box-shadow: 5px 5px 5px rgba(255,255,255,0.2);
-  transition: all 0.5s;
+  transition: all 1s;
 }
 
 

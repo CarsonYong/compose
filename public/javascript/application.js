@@ -157,7 +157,7 @@ $(document).ready(function() {
   $('#add-hashtag').on("click", function() {
     $('#hashtag-input').toggleClass('active');
     $('#add-hashtag').hide();
-    $('#add-more-hashtags').hide();  
+    $('#add-more-hashtags').hide();
   })
 
   $('button').click(function(e) {
@@ -176,15 +176,15 @@ $(document).ready(function() {
        dataType: 'json',
        error: function (xhr, ajaxOptions, thrownError) {
         $('#search-results p').empty();
-        error = thrownError
-        $("<p>"+error+"</p>").appendTo("#songs");
+        // error = thrownError
+        $("<p style='font-family:NeutraThin'>Oops, this is awkward, something's gone awry.</p>").appendTo("#songs");
         },
        success: function(html){
         var data = (html)
         console.log(data)
         if (data.tracks.items.length === 0){
           $('#search-results p').empty();
-          $("<p> we could not find any results for '"+searchQuery+"'. Please search for another song.</p>").appendTo("#songs");
+          $("<p style='font-family:NeutraThin'>Sorry, we could not find any results for '"+searchQuery+"'. Either we broke something, or you can't type. Please try searching again.</p>").appendTo("#songs");
         }
         var albums = (data.albums.items)
         for(var i = 0; i < albums.length; i++) {
