@@ -211,11 +211,14 @@
   background-color: #32b1fc;
 }
 
-#search-input {
+input {
   text-align: center;
   font-family: NeutraThin;
-  font-size: 2em;
   border: none;
+}
+
+#search-input {
+  font-size: 2em;
   border-top-left-radius: 2px;
   border-bottom-left-radius: 2px;
   width: 80%;
@@ -223,6 +226,35 @@
   height: 50px;
   padding: 5px;
   margin-left: 26%;
+}
+
+#add-more-hashtags {
+  display: inline;
+  margin-left: 30%;
+  font-family: NeutraThin;
+  font-size: 1.5em;
+  color: #46484e;
+}
+
+#add-hashtag {
+  font-size: 1.5em;
+  margin-left: 2%;
+}
+
+#hashtag-input {
+  color: #1d1d1d;
+  height: 40px;
+  max-width: 290px;
+  width: 60%;
+  margin-left: 21%;
+  margin-bottom: 5%;
+  font-size: 1.5em;
+  opacity: 0;
+  transition: all 1s;
+}
+
+#hashtag-input.active {
+  opacity: 1;
 }
 
 #search-form input:focus, textarea:focus {

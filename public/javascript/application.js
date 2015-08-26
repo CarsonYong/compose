@@ -1,9 +1,23 @@
 $(document).ready(function() {
 
   $('#player').each(function(){
-    var songId = $(this).attr('songId')
-    var songName = $(this).attr('songName');
-    var songArtist = $(this).attr('songArtist')
+    var songId = $(this).data('song-id')
+    var songName = $(this).data('song-name');
+    var songArtist = $(this).data('song-artist')
+    var songTag = $(this).data('song-tag')
+    var preTagArr = songTag.split(',');
+    var tagArr = [];
+
+    for (var i = 0; i < preTagArr.length; i ++) {
+      tagArr.push(preTagArr[i].trim());
+    }
+
+    if (songTag.length > 0) {
+      getInsta(tagArr)
+      getLyrics()
+    } else {
+      getLyrics()
+    }
 
     // addd play button to player screen
     $("#play-btn").toggleClass("active");
@@ -13,13 +27,11 @@ $(document).ready(function() {
     $(".navbar li.player-page-nav").toggleClass("active");
 
     $("#play-btn").on("mouseenter", function() {
-      console.log("mouse has entered");
       $("#spotify-player").addClass("active");
       $("#play-btn").removeClass("active");
     })
 
     $("#spotify-player").on("mouseout", function() {
-      console.log("mouse left");
       $("#play-btn").addClass("active");
       $("#spotify-player").removeClass("active");
     })
@@ -58,7 +70,7 @@ $(document).ready(function() {
             data: {lyrics:lyrics}
           }).success(getInsta)
 
-                
+
       setInterval(getInsta,10000);
       }) // End Lyrics
     })
@@ -89,7 +101,7 @@ $(document).ready(function() {
       )
     }
   } // End for getInsta function
-  getLyrics()
+  //getLyrics()
 })
 
   $('.background-wrapper').each(function(){
@@ -126,15 +138,21 @@ $(document).ready(function() {
   //   $(".landing-page #homepage-heading").show();
   // })
 
-  $("button").click(function(e) {
+  $('#add-hashtag').on("click", function() {
+    $('#hashtag-input').toggleClass('active');
+    $('#add-hashtag').hide();
+    $('#add-more-hashtags').hide();  
+  })
+
+  $('button').click(function(e) {
     e.preventDefault()
     e.stopPropagation()
-    $("#songs").empty();
-    $("#artist").empty();
-    $("#search-results").addClass("active");
-    $(".landing-page").addClass("active");
-    $(".landing-page #homepage-heading").hide();
-    var searchQuery = $("#search-input").val();
+    $('#songs').empty();
+    $('#artist').empty();
+    $('#search-results').addClass('active');
+    $('.landing-page').addClass('active');
+    $('.landing-page #homepage-heading').hide();
+    var searchQuery = $('#search-input').val();
 
      $.ajax({
       url: "https://api.spotify.com/v1/search?q="+searchQuery+"&type=artist,track,album&limit=3",
@@ -186,8 +204,12 @@ $(document).ready(function() {
           var songId = ($(this).attr('id'));
           var songName = encodeURIComponent($(this).attr('songName'));
           var songArtist = encodeURIComponent($(this).attr('songArtist'));
+          //var songTag = encodeURIComponent($(this).attr('songTag'));
+          var songTag = $('#hashtag-input').val();
+          console.log(songTag);
+          console.log("test");
 
-          window.location="/player?songId="+songId+"&songName="+songName+"&songArtist="+songArtist;
+          window.location="/player?songId="+songId+"&songName="+songName+"&songArtist="+songArtist+"&songTag="+songTag;
 
          }) //End of for loop from song results
         }
