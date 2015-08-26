@@ -128,11 +128,17 @@ $(document).ready(function() {
       dataType: 'jsonp',
       timeout: 5000
     }).fail(function(xhr, ajaxOptions, thrownError){
+      // $('.landing-page').append(
+      //   "<div id='error'>\
+      //     <p style='font-family:NeutraThin;color:#ffffff;'>Oops, this is awkward, something's gone awry.</p>\
+      //   </div>"
+      // );
         alert("Sorry, looks like something has gone wrong "+thrownError)
+        //$("<p style='font-family:NeutraThin;color:#ffffff;'>Oops, this is awkward, something's gone awry.</p>").appendTo("#error");
       }).success(function(data){
       console.log(data)
       arr = data.data;
-      for(var i = 0; i< arr.length; i ++) {
+      for (var i = 0; i< arr.length; i ++) {
         var img = arr[i];
         var url = img.images.low_resolution.url;
         $("<div class='floated-img'><img src='"+url+"'></img></div>").appendTo(".background");
@@ -145,7 +151,6 @@ $(document).ready(function() {
 
   $('#player').each(function(){
     var songId = $(this).attr('songId');
-    console.log(songId)
   })
 
   // $(window).on("click", function() {
@@ -176,7 +181,6 @@ $(document).ready(function() {
        dataType: 'json',
        error: function (xhr, ajaxOptions, thrownError) {
         $('#search-results p').empty();
-        // error = thrownError
         $("<p style='font-family:NeutraThin'>Oops, this is awkward, something's gone awry.</p>").appendTo("#songs");
         },
        success: function(html){
