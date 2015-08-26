@@ -44,10 +44,17 @@ $(document).ready(function() {
     $.ajax({
       url:"http://developer.echonest.com/api/v4/song/search?api_key=FZBHWASTWJKMBT0CU&artist="+songArtist+"&title="+songName+"&results=11&bucket=tracks&bucket=id:musixmatch-WW&limit=true",
       method: 'get',
-      dataType: 'json'
+      dataType: 'json',
+      timeout: 5000
+      }).fail(function(xhr, ajaxOptions, thrownError){
+        alert("Sorry, looks like something has gone wrong "+thrownError)
       }).success(function(html){
         var data = (html);
+        console.log(data)
         console.log(data.response.songs[0])
+        if (data.response.songs.length === 0 ) {
+          alert("Sorry, looks like something has gone wrong.")
+        }
         var musixmatchId = data.response.songs[0].foreign_ids[0].foreign_id;
         console.log(musixmatchId)
         id = musixmatchId.split("song:")
@@ -57,8 +64,11 @@ $(document).ready(function() {
         $.ajax({
           url: "http://api.musixmatch.com/ws/1.1/track.lyrics.get?apikey=c1652e120f3e1c24a918c09c65b219a9&track&track_id="+id+"&format=jsonp",
           method: 'get',
-          dataType: 'jsonp'
-        }).success(function(html){
+          dataType: 'jsonp',
+          timeout: 5000
+        }).fail(function(xhr, ajaxOptions, thrownError){
+        alert("Sorry, looks like something has gone wrong "+thrownError)
+      }).success(function(html){
           console.log(html)
           var data = (html);
           var lyrics = data.message.body.lyrics.lyrics_body;
@@ -85,7 +95,10 @@ $(document).ready(function() {
       $.ajax({
         url: "https://api.instagram.com/v1/tags/"+data[i]+"/media/recent?client_id=6b57da6cc49c4e2ca5af262214decb93",
         method: "GET",
-        dataType: 'jsonp'
+        dataType: 'jsonp',
+        timeout: 5000
+      }).fail(function(xhr, ajaxOptions, thrownError){
+        alert("Sorry, looks like something has gone wrong "+thrownError)
       }).success((function(num){
           return(
           function(data){
@@ -112,8 +125,11 @@ $(document).ready(function() {
     $.ajax({
       url: "https://api.instagram.com/v1/tags/"+tag+"/media/recent?client_id=6b57da6cc49c4e2ca5af262214decb93",
       method: "GET",
-      dataType: 'jsonp'
-    }).success(function(data){
+      dataType: 'jsonp',
+      timeout: 5000
+    }).fail(function(xhr, ajaxOptions, thrownError){
+        alert("Sorry, looks like something has gone wrong "+thrownError)
+      }).success(function(data){
       console.log(data)
       arr = data.data;
       for(var i = 0; i< arr.length; i ++) {
@@ -159,11 +175,17 @@ $(document).ready(function() {
        method:'get',
        dataType: 'json',
        error: function (xhr, ajaxOptions, thrownError) {
-        console.log(thrownError)
+        $('#search-results p').empty();
+        error = thrownError
+        $("<p>"+error+"</p>").appendTo("#songs");
         },
        success: function(html){
         var data = (html)
         console.log(data)
+        if (data.tracks.items.length === 0){
+          $('#search-results p').empty();
+          $("<p> we could not find any results for '"+searchQuery+"'. Please search for another song.</p>").appendTo("#songs");
+        }
         var albums = (data.albums.items)
         for(var i = 0; i < albums.length; i++) {
           var album = albums[i];
@@ -207,7 +229,6 @@ $(document).ready(function() {
           //var songTag = encodeURIComponent($(this).attr('songTag'));
           var songTag = $('#hashtag-input').val();
           console.log(songTag);
-          console.log("test");
 
           window.location="/player?songId="+songId+"&songName="+songName+"&songArtist="+songArtist+"&songTag="+songTag;
 
