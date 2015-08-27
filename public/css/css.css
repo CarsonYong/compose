@@ -431,7 +431,8 @@ input {
 #error {
   border-radius: 5px;
   display: inline-block;
-  margin-left: 35%;
+  margin-left: 37%;
+  margin-top: 200px;
   height: 46px;
   max-width: 362px;
   width: 100%;
@@ -447,4 +448,6 @@ input {
 #error p {
   margin: 11px 16px;
   font-size: 1.5em;
+  font-family: NeutraThin;
+  color: #ffffff;
 }

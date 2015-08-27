@@ -47,19 +47,19 @@ $(document).ready(function() {
       dataType: 'json',
       timeout: 5000
       }).fail(function(xhr, ajaxOptions, thrownError){
-        alert("Sorry, looks like something has gone wrong "+thrownError)
+        // $('.container').html(
+        //   "<div id='error'>\
+        //     <p>Oops, this is awkward, something's gone awry.</p>\
+        //   </div>"
+        // );
       }).success(function(html){
         var data = (html);
-        console.log(data)
-        console.log(data.response.songs[0])
         if (data.response.songs.length === 0 ) {
           alert("Sorry, looks like something has gone wrong.")
         }
         var musixmatchId = data.response.songs[0].foreign_ids[0].foreign_id;
-        console.log(musixmatchId)
         id = musixmatchId.split("song:")
         id = parseInt(id[1])
-        console.log(id)
         // Start Lyrics
         $.ajax({
           url: "http://api.musixmatch.com/ws/1.1/track.lyrics.get?apikey=c1652e120f3e1c24a918c09c65b219a9&track&track_id="+id+"&format=jsonp",
@@ -98,7 +98,11 @@ $(document).ready(function() {
         dataType: 'jsonp',
         timeout: 5000
       }).fail(function(xhr, ajaxOptions, thrownError){
-        alert("Sorry, looks like something has gone wrong "+thrownError)
+        // $('.container').html(
+        //   "<div id='error'>\
+        //     <p>Oops, this is awkward, something's gone awry.</p>\
+        //   </div>"
+        // );
       }).success((function(num){
           return(
           function(data){
@@ -128,13 +132,11 @@ $(document).ready(function() {
       dataType: 'jsonp',
       timeout: 5000
     }).fail(function(xhr, ajaxOptions, thrownError){
-      // $('.landing-page').append(
-      //   "<div id='error'>\
-      //     <p style='font-family:NeutraThin;color:#ffffff;'>Oops, this is awkward, something's gone awry.</p>\
-      //   </div>"
-      // );
-        alert("Sorry, looks like something has gone wrong "+thrownError)
-        //$("<p style='font-family:NeutraThin;color:#ffffff;'>Oops, this is awkward, something's gone awry.</p>").appendTo("#error");
+       $('.container').html(
+         "<div id='error'>\
+           <p>Oops, this is awkward, something's gone awry.</p>\
+         </div>"
+       );
       }).success(function(data){
       console.log(data)
       arr = data.data;
