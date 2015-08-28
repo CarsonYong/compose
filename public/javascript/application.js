@@ -66,8 +66,8 @@ $(document).ready(function() {
   $('<iframe src="https://embed.spotify.com/?uri=spotify:track:'+songId+'" width="300" height="80" frameborder="0" allowtransparency="true" id="spotify"></iframe>').appendTo("#spotify-player");
         //Make ajax call for musixmatch song id number
   function getLyrics(){
-    songArtist = songArtist;
-    songName = songName;
+    songArtist = songArtist.replace(/'/g, '')
+    songName = songName.replace(/'/g, '')
     $.ajax({
       url:"http://developer.echonest.com/api/v4/song/search?api_key=FZBHWASTWJKMBT0CU&artist="+songArtist+"&title="+songName+"&results=11&bucket=tracks&bucket=id:musixmatch-WW&limit=true",
       method: 'get',
@@ -113,12 +113,13 @@ $(document).ready(function() {
   }// End for getLyrics function
   var stopwords
     function getInsta(data){
-    $(".player-floated-img").empty();  
+    //$(".player-floated-img").empty();  
     stopwords = stopwords || data
     data = data || stopwords
     //$(".player-floated-img").empty();
     for(var i = 0; i < data.length; i ++) {
       var word = data[i];
+      data[i] = data[i].replace(/'/g, '')
       $.ajax({
         url: "https://api.instagram.com/v1/tags/"+data[i]+"/media/recent?client_id=6b57da6cc49c4e2ca5af262214decb93",
         method: "GET",
