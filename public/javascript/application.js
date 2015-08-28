@@ -10,30 +10,31 @@ $(document).ready(function() {
 
     // to add in pre-populated hashtags if no lyrics available
     function indexInsta(tag){
-      var data =[music, lovemusic, happy]
-      for(var i = 0; i < data.length; i ++) {
-        var word = data[i];
-    $.ajax({
-      url: "https://api.instagram.com/v1/tags/"+tag+"/media/recent?client_id=6b57da6cc49c4e2ca5af262214decb93",
-      method: "GET",
-      dataType: 'jsonp',
-      timeout: 5000
-    }).fail(function(xhr, ajaxOptions, thrownError){
-        alert("Sorry, looks like something has gone wrong "+thrownError)
-      }).success((function(num){
-          return(
-          function(data){
-            arr = data.data;
-            for(var j = 0; j < arr.length; j++) {
-              var img = arr[j];
-              var url = img.images.low_resolution.url;
-              console.log(num)
-              $(".player-floated-img").eq(num).append($("<img src='"+url+"'></img>"));
-            }
-          })
-        })(i)
-      )
-  }
+         var data =["music","lovemusic","happy"]
+         for(var i = 0; i < data.length; i ++) {
+           var word = data[i];
+       $.ajax({
+         url: "https://api.instagram.com/v1/tags/"+word+"/media/recent?client_id=6b57da6cc49c4e2ca5af262214decb93",
+         method: "GET",
+         dataType: 'jsonp',
+         timeout: 5000
+       }).fail(function(xhr, ajaxOptions, thrownError){
+           alert("Sorry, looks like something has gone wrong "+thrownError)
+         }).success((function(num){
+             return(
+             function(data){
+               arr = data.data;
+               for(var j = 0; j < arr.length; j++) {
+                 var img = arr[j];
+                 var url = img.images.low_resolution.url;
+                 console.log(num)
+                 $(".player-floated-img").eq(num).append($("<img src='"+url+"'></img>"));
+               }
+             })
+           })(i)
+         )
+       }
+      }
 
     for (var i = 0; i < preTagArr.length; i ++) {
       tagArr.push(preTagArr[i].trim());
@@ -80,7 +81,7 @@ $(document).ready(function() {
         console.log(data)
         console.log(data.response.songs[0])
         if (data.response.songs.length === 0 ) {
-          //alert("Sorry, looks like something has gone wrong.")
+          alert("Oh, did you make up that song? We can't find those lyrics but enjoy our handpicked images to compliment your song!")
           indexInsta("lovemusic");
         }
         var musixmatchId = data.response.songs[0].foreign_ids[0].foreign_id;
@@ -199,7 +200,7 @@ $(document).ready(function() {
     var searchQuery = $('#search-input').val();
 
      $.ajax({
-      url: "https://api.spotify.com/v1/search?q="+searchQuery+"&type=artist,track,album&limit=3",
+      url: "https://api.spotify.com/v1/search?q="+searchQuery+"&type=artist,track,album&limit=4",
        method:'get',
        dataType: 'json',
        error: function (xhr, ajaxOptions, thrownError) {
@@ -220,13 +221,12 @@ $(document).ready(function() {
           var albumID = album.id
           var albumName = album.name
         }
-
         var artists = (data.artists.items)
         for(var i = 0; i < artists.length; i++) {
           var artist = artists[i];
           var artistId = artist.id;
           var artistName = artist.name;
-          $("<li>"+artistName+"</li>").appendTo("#artist");
+          // $("<li>"+artistName+"</li>").appendTo("#artist");
         }
         var songs = (data.tracks.items)
         for(var i = 0; i < songs.length; i++ ) { //Beginning song
