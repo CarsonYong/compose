@@ -27,7 +27,6 @@ $(document).ready(function() {
                for(var j = 0; j < arr.length; j++) {
                  var img = arr[j];
                  var url = img.images.low_resolution.url;
-                 console.log(num)
                  $(".player-floated-img").eq(num).append($("<img src='"+url+"'></img>"));
                }
              })
@@ -78,8 +77,6 @@ $(document).ready(function() {
         alert("Sorry, looks like something has gone wrong "+thrownError)
       }).success(function(html){
         var data = (html);
-        console.log(data)
-        console.log(data.response.songs[0])
         if (data.response.songs.length === 0 ) {
           alert("Oh, did you make up that song? We can't find those lyrics but enjoy our handpicked images to compliment your song!")
           indexInsta("lovemusic");
@@ -110,12 +107,13 @@ $(document).ready(function() {
           }).success(getInsta)
 
 
-      setInterval(getInsta,10000);
+      setInterval(getInsta,40000);
       }) // End Lyrics
     })
   }// End for getLyrics function
   var stopwords
     function getInsta(data){
+    $(".player-floated-img").empty();  
     stopwords = stopwords || data
     data = data || stopwords
     //$(".player-floated-img").empty();
@@ -135,7 +133,6 @@ $(document).ready(function() {
             for(var j = 0; j < arr.length; j++) {
               var img = arr[j];
               var url = img.images.low_resolution.url;
-              console.log(num)
               $(".player-floated-img").eq(num).append($("<img src='"+url+"'></img>"));
             }
           })
@@ -159,7 +156,6 @@ $(document).ready(function() {
     }).fail(function(xhr, ajaxOptions, thrownError){
         alert("Sorry, looks like something has gone wrong "+thrownError)
       }).success(function(data){
-      console.log(data)
       arr = data.data;
       for(var i = 0; i< arr.length; i ++) {
         var img = arr[i];
@@ -174,7 +170,6 @@ $(document).ready(function() {
 
   $('#player').each(function(){
     var songId = $(this).attr('songId');
-    console.log(songId)
   })
 
   // $(window).on("click", function() {
@@ -210,7 +205,6 @@ $(document).ready(function() {
         },
        success: function(html){
         var data = (html)
-        console.log(data)
         if (data.tracks.items.length === 0){
           $('#search-results p').empty();
           $("<p style='font-family:NeutraThin'>Sorry, we could not find any results for '"+searchQuery+"'. Either we broke something, or you can't type. Please try searching again.</p>").appendTo("#songs");
@@ -256,7 +250,6 @@ $(document).ready(function() {
           var songArtist = encodeURIComponent($(this).attr('songArtist'));
           //var songTag = encodeURIComponent($(this).attr('songTag'));
           var songTag = $('#hashtag-input').val();
-          console.log(songTag);
 
           window.location="/player?songId="+songId+"&songName="+songName+"&songArtist="+songArtist+"&songTag="+songTag;
 
