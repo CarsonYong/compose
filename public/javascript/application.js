@@ -8,6 +8,33 @@ $(document).ready(function() {
     var preTagArr = songTag.split(',');
     var tagArr = [];
 
+    // to add in pre-populated hashtags if no lyrics available
+    function indexInsta(tag){
+      var data =[music, lovemusic, happy]
+      for(var i = 0; i < data.length; i ++) {
+        var word = data[i];
+    $.ajax({
+      url: "https://api.instagram.com/v1/tags/"+tag+"/media/recent?client_id=6b57da6cc49c4e2ca5af262214decb93",
+      method: "GET",
+      dataType: 'jsonp',
+      timeout: 5000
+    }).fail(function(xhr, ajaxOptions, thrownError){
+        alert("Sorry, looks like something has gone wrong "+thrownError)
+      }).success((function(num){
+          return(
+          function(data){
+            arr = data.data;
+            for(var j = 0; j < arr.length; j++) {
+              var img = arr[j];
+              var url = img.images.low_resolution.url;
+              console.log(num)
+              $(".player-floated-img").eq(num).append($("<img src='"+url+"'></img>"));
+            }
+          })
+        })(i)
+      )
+  }
+
     for (var i = 0; i < preTagArr.length; i ++) {
       tagArr.push(preTagArr[i].trim());
     }
@@ -53,7 +80,8 @@ $(document).ready(function() {
         console.log(data)
         console.log(data.response.songs[0])
         if (data.response.songs.length === 0 ) {
-          alert("Sorry, looks like something has gone wrong.")
+          //alert("Sorry, looks like something has gone wrong.")
+          indexInsta("lovemusic");
         }
         var musixmatchId = data.response.songs[0].foreign_ids[0].foreign_id;
         console.log(musixmatchId)
