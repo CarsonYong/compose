@@ -382,8 +382,8 @@ input {
 }
 
 .player-floated-img img:first-child {
-  -webkit-animation: bannermove 30s linear infinite;
-          animation: bannermove 30s linear infinite;
+  -webkit-animation: bannermove 40s linear infinite;
+          animation: bannermove 40s linear infinite;
 }
 
 @-webkit-keyframes "bannermove" {
